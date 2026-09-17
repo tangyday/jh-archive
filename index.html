@@ -1,2193 +1,370 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="웹 기획, 디자인, AI 활용 프로젝트를 담은 정혜의 포트폴리오" />
-  <meta property="og:title" content="JH ARCHIVE" />
-  <meta property="og:description" content="웹 기획부터 디자인, AI 활용, 실제 구현까지. 정혜의 크리에이티브 포트폴리오입니다." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="./images/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="JH ARCHIVE" />
-  <meta name="twitter:description" content="웹 기획부터 디자인, AI 활용, 실제 구현까지. 정혜의 크리에이티브 포트폴리오입니다." />
-  <meta name="twitter:image" content="./images/og-image.png" />
-
-  <title>JH ARCHIVE | WEB · DESIGN · AI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff4cf">
+  <meta name="description" content="코코와 함께 사라진 츄르의 행방을 추리하는 코믹 방탈출 게임">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="사라진 츄르를 찾아라!">
+  <meta property="og:description" content="나나, 로봇청소기, 집사 중 진짜 범인은 누구? 코코의 코믹 추리 방탈출 게임">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="images/og-churu.png">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="940">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="사라진 츄르를 찾아라!">
+  <meta name="twitter:description" content="세 용의자를 조사하고 사라진 츄르의 행방을 밝혀라!">
+  <meta name="twitter:image" content="images/og-churu.png">
+  <title>사라진 츄르를 찾아라!</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ffd75e'/%3E%3Ccircle cx='24' cy='27' r='7' fill='%230f7774'/%3E%3Ccircle cx='40' cy='27' r='7' fill='%230f7774'/%3E%3Ccircle cx='18' cy='39' r='7' fill='%230f7774'/%3E%3Ccircle cx='46' cy='39' r='7' fill='%230f7774'/%3E%3Cellipse cx='32' cy='45' rx='13' ry='11' fill='%230f7774'/%3E%3C/svg%3E">
   <style>
-    :root{
-      --bg:#f7f8fb;
-      --card:#ffffff;
-      --text:#171a21;
-      --muted:#737b8c;
-      --line:#e8ebf1;
-      --accent:#ef4d45;
-      --accent-soft:#fff0ee;
-      --dark:#10131a;
-      --radius:24px;
-      --shadow:0 18px 50px rgba(23,26,33,.08);
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 15% 5%, rgba(239,77,69,.08), transparent 27%),
-        radial-gradient(circle at 88% 12%, rgba(65,114,255,.07), transparent 24%),
-        var(--bg);
-      line-height:1.6;
-    }
-
-    a{color:inherit;text-decoration:none}
-    button{font:inherit}
-
-    .wrap{
-      width:min(1180px, calc(100% - 40px));
-      margin:0 auto;
-    }
-
-    header{
-      padding:28px 0;
-      position:sticky;
-      top:0;
-      z-index:10;
-      backdrop-filter:blur(14px);
-      background:rgba(247,248,251,.78);
-      border-bottom:1px solid rgba(232,235,241,.7);
-    }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .brand{
-      display:inline-flex;
-      align-items:baseline;
-      gap:4px;
-      font-size:18px;
-      font-weight:800;
-      letter-spacing:-.03em;
-      color:var(--text);
-    }
-
-    .brand-dot{
-      color:var(--accent);
-    }
-
-    .nav-links{
-      display:flex;
-      gap:22px;
-      color:var(--muted);
-      font-size:14px;
-      font-weight:600;
-    }
-
-    .hero{
-      padding:110px 0 72px;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:var(--accent-soft);
-      color:var(--accent);
-      font-size:13px;
-      font-weight:800;
-      margin-bottom:24px;
-    }
-
-    h1{
-      max-width:820px;
-      font-size:clamp(42px,7vw,78px);
-      line-height:1.06;
-      letter-spacing:-.055em;
-      font-weight:850;
-    }
-
-    .hero p{
-      max-width:650px;
-      margin-top:26px;
-      font-size:18px;
-      color:var(--muted);
-      word-break:keep-all;
-    }
-
-    .hero-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:34px;
-    }
-
-    .chip{
-      padding:10px 14px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--line);
-      color:#4d5566;
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .section{
-      padding:42px 0 100px;
-    }
-
-
-    #projects .section-head h2{
-      font-size:36px;
-    }
-
-    #projects .section-head .eyebrow,
-    #projects .section-head small,
-    #projects .section-head .section-kicker{
-      font-size:10px;
-      line-height:1.3;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:28px;
-    }
-
-    .section-head h2{
-      font-size: 36px;
-      letter-spacing:-.04em;
-    }
-
-    .section-head p{
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:24px;
-    }
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      overflow:hidden;
-      box-shadow:0 1px 0 rgba(255,255,255,.9) inset;
-      transition:.28s ease;
-    }
-
-    .card:hover{
-      transform:translateY(-6px);
-      box-shadow:var(--shadow);
-      border-color:#dde1ea;
-    }
-
-    .thumb{
-      aspect-ratio:16/10;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .thumb::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(145deg,rgba(255,255,255,.32),transparent 44%),
-        radial-gradient(circle at 82% 18%,rgba(255,255,255,.46),transparent 22%);
-      pointer-events:none;
-    }
-
-    .thumb.business{
-      background:linear-gradient(135deg,#f6a896 0%,#f7bca4 55%,#fde3c9 100%);
-    }
-
-    .thumb.chatbot{
-      background:linear-gradient(135deg,#6e9ef1 0%,#90bdfd 54%,#d9edff 100%);
-    }
-    .thumb.wedding{
-      background:linear-gradient(135deg,#f5d8dc 0%,#f8e7e8 52%,#fff7f3 100%);
-    }
-    .thumb.game{
-      background:linear-gradient(135deg,#ffe7a6 0%,#fff1c7 50%,#d9f1f5 100%);
-    }
-
-    .thumb-image-wrap{
-      position:relative;
-      z-index:1;
-      width:94%;
-      height:86%;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:0 18px 42px rgba(20,33,60,.13);
-      border:1px solid rgba(255,255,255,.72);
-      background:#fff;
-    }
-
-    .thumb-image{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:cover;
-      object-position:top center;
-      background:#fff;
-    }
-
-    .screen{
-      position:relative;
-      z-index:1;
-      width:94%;
-      height:86%;
-      background:#fff;
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.72);
-      box-shadow:0 18px 42px rgba(20,33,60,.13);
-      transform:perspective(900px) rotateX(1.2deg);
-    }
-
-    .browser-bar{
-      height:28px;
-      display:flex;
-      align-items:center;
-      gap:6px;
-      padding:0 12px;
-      background:#f5f6f8;
-      border-bottom:1px solid #eceff3;
-    }
-
-    .browser-dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:#d6dae2;
-    }
-
-    .browser-url{
-      margin-left:8px;
-      height:10px;
-      width:42%;
-      border-radius:999px;
-      background:#e6e9ee;
-    }
-
-    /* Landing page thumbnail */
-    .landing-body{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      height:calc(100% - 28px);
-      background:linear-gradient(135deg,#fffaf7,#ffffff);
-    }
-
-    .landing-copy{
-      padding:22px 14px 16px 20px;
-    }
-
-    .landing-kicker{
-      width:46px;
-      height:8px;
-      border-radius:999px;
-      background:#f19577;
-      margin-bottom:12px;
-    }
-
-    .landing-title{
-      width:86%;
-      height:13px;
-      border-radius:5px;
-      background:#20242b;
-      margin-bottom:7px;
-    }
-
-    .landing-title.short{width:62%}
-
-    .landing-desc{
-      width:92%;
-      height:6px;
-      border-radius:999px;
-      background:#dfe3e8;
-      margin-top:9px;
-    }
-
-    .landing-desc.short{width:72%}
-
-    .landing-btn{
-      width:74px;
-      height:22px;
-      border-radius:7px;
-      background:#ef6f55;
-      margin-top:16px;
-    }
-
-    .landing-mini-cards{
-      display:flex;
-      gap:5px;
-      margin-top:18px;
-    }
-
-    .landing-mini-cards span{
-      width:42px;
-      height:31px;
-      border-radius:7px;
-      background:#fff;
-      border:1px solid #eceff2;
-      box-shadow:0 4px 10px rgba(32,36,43,.05);
-    }
-
-    .landing-visual{
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 58% 40%,rgba(244,148,111,.23),transparent 31%),
-        linear-gradient(160deg,#fff4ed,#ffe4d1);
-    }
-
-    .landing-phone{
-      position:absolute;
-      width:46%;
-      height:72%;
-      left:28%;
-      top:14%;
-      border-radius:16px;
-      background:#20242a;
-      padding:5px;
-      box-shadow:0 16px 30px rgba(55,39,30,.18);
-      transform:rotate(6deg);
-    }
-
-    .landing-phone::before{
-      content:"";
-      position:absolute;
-      inset:5px;
-      border-radius:12px;
-      background:linear-gradient(180deg,#fff,#fff7f2);
-    }
-
-    .landing-phone::after{
-      content:"";
-      position:absolute;
-      left:18%;
-      right:18%;
-      top:23%;
-      height:34%;
-      border-radius:10px;
-      background:linear-gradient(135deg,#f27d62,#ffbd82);
-      box-shadow:0 44px 0 -7px #f0f2f5;
-    }
-
-    .floating-card{
-      position:absolute;
-      width:54px;
-      height:37px;
-      border-radius:9px;
-      background:#fff;
-      box-shadow:0 8px 18px rgba(70,52,40,.12);
-    }
-
-    .floating-card.one{right:9%;top:20%}
-    .floating-card.two{left:7%;bottom:15%;width:45px;height:32px}
-
-    /* Chatbot thumbnail */
-    .chat-layout{
-      display:grid;
-      grid-template-columns:32% 68%;
-      height:calc(100% - 28px);
-      background:#f8fafc;
-    }
-
-    .chat-sidebar{
-      padding:14px 10px;
-      background:#f2f5f9;
-      border-right:1px solid #e8edf3;
-    }
-
-    .chat-logo{
-      width:34px;
-      height:10px;
-      border-radius:999px;
-      background:#5b86f7;
-      margin-bottom:18px;
-    }
-
-    .chat-menu{
-      height:7px;
-      border-radius:999px;
-      background:#d8dee8;
-      margin-bottom:10px;
-    }
-
-    .chat-menu.short{width:66%}
-
-    .chat-main{
-      padding:12px 14px;
-      display:flex;
-      flex-direction:column;
-      background:linear-gradient(180deg,#ffffff,#f8fbff);
-    }
-
-    .chat-header{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding-bottom:9px;
-      border-bottom:1px solid #edf0f4;
-    }
-
-    .chat-avatar{
-      width:25px;
-      height:25px;
-      border-radius:50%;
-      background:linear-gradient(135deg,#4b78ed,#7cc9ff);
-      position:relative;
-    }
-
-    .chat-avatar::after{
-      content:"";
-      position:absolute;
-      width:8px;height:6px;
-      right:-1px;bottom:0;
-      background:#7cc9ff;
-      clip-path:polygon(0 0,100% 0,100% 100%);
-    }
-
-    .chat-name{
-      width:56px;
-      height:8px;
-      border-radius:999px;
-      background:#cfd6df;
-    }
-
-    .messages{
-      flex:1;
-      padding-top:10px;
-      display:flex;
-      flex-direction:column;
-      gap:7px;
-    }
-
-    .bubble{
-      max-width:76%;
-      padding:8px 10px;
-      border-radius:12px;
-      font-size:0;
-    }
-
-    .bubble::before,
-    .bubble::after{
-      content:"";
-      display:block;
-      height:5px;
-      border-radius:999px;
-    }
-
-    .bubble.bot{
-      align-self:flex-start;
-      background:#edf3ff;
-      border-bottom-left-radius:4px;
-    }
-
-    .bubble.bot::before{width:68px;background:#aab8d3}
-    .bubble.bot::after{width:46px;background:#c5cfdf;margin-top:5px}
-
-    .bubble.user{
-      align-self:flex-end;
-      background:#4c7df0;
-      border-bottom-right-radius:4px;
-    }
-
-    .bubble.user::before{width:54px;background:rgba(255,255,255,.86)}
-    .bubble.user::after{width:34px;background:rgba(255,255,255,.6);margin-top:5px}
-
-    .quick-replies{
-      display:flex;
-      gap:5px;
-      margin-top:1px;
-    }
-
-    .quick-replies span{
-      width:46px;
-      height:17px;
-      border:1px solid #cfdaf4;
-      border-radius:999px;
-      background:#fff;
-    }
-
-    .chat-input{
-      margin-top:auto;
-      height:25px;
-      border-radius:999px;
-      border:1px solid #e0e5ec;
-      background:#fff;
-      position:relative;
-    }
-
-    .chat-input::before{
-      content:"";
-      position:absolute;
-      left:10px;top:9px;
-      width:48%;
-      height:5px;
-      background:#e1e5eb;
-      border-radius:999px;
-    }
-
-    .chat-input::after{
-      content:"";
-      position:absolute;
-      right:4px;top:4px;
-      width:17px;height:17px;
-      border-radius:50%;
-      background:#4c7df0;
-    }
-
-    .card-body{padding:28px}
-    .card-top{
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-      align-items:flex-start;
-    }
-
-    .tag{
-      color:var(--accent);
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      margin-bottom:10px;
-    }
-
-    .card h3{
-      font-size:24px;
-      letter-spacing:-.035em;
-      line-height:1.25;
-    }
-
-    .card p{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:15px;
-      word-break:keep-all;
-    }
-
-    .skills{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:22px;
-    }
-
-    .skills span{
-      padding:7px 10px;
-      background:#f5f6f8;
-      border-radius:999px;
-      color:#606879;
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .arrow{
-      flex:0 0 auto;
-      width:42px;height:42px;border-radius:50%;
-      display:grid;place-items:center;
-      border:1px solid var(--line);
-      transition:.2s ease;
-      font-size:18px;
-    }
-
-    .card:hover .arrow{
-      background:var(--dark);
-      color:#fff;
-      border-color:var(--dark);
-    }
-
-    .more-card{
-      min-height:310px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      background:transparent;
-      border:1.5px dashed #d9dde6;
-    }
-
-    .more-card .inner{
-      padding:40px;
-      color:var(--muted);
-    }
-
-    .more-card strong{
-      display:block;
-      font-size:22px;
-      color:var(--text);
-      margin-bottom:8px;
-    }
-
-
-
-    .gallery-section{
-      margin-top:92px;
-    }
-
-    .gallery-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:36px;
-    }
-
-    .gallery-head h2{
-      font-size:32px;
-      letter-spacing:-.04em;
-    }
-
-    .gallery-head p{
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .gallery-group + .gallery-group{
-      margin-top:68px;
-      padding-top:56px;
-      border-top:1px solid var(--line);
-    }
-
-    .gallery-subhead{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:20px;
-    }
-
-    .gallery-subhead h3{
-      font-size:22px;
-      letter-spacing:-.035em;
-    }
-
-    .gallery-subhead p{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .section-date{
-      display:inline-block;
-      margin-left:6px;
-      color:#9aa1ad;
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:.02em;
-      vertical-align:middle;
-    }
-
-    .banner-grid{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:16px;
-    }
-
-    .banner-grid.app-grid{
-      grid-template-columns:repeat(5,minmax(0,1fr));
-      gap:14px;
-    }
-
-    .banner-card{
-      overflow:hidden;
-      border-radius:20px;
-      border:1px solid var(--line);
-      background:#fff;
-      transition:.26s ease;
-      box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
-      cursor:pointer;
-    }
-
-    .banner-card:hover{
-      transform:translateY(-5px);
-      box-shadow:var(--shadow);
-    }
-
-    .banner-card.app-card .banner-media{
-      aspect-ratio:9/16;
-      background:#f3f5f8;
-    }
-
-    .banner-card.app-card .banner-media::before{
-      content:"APP SCREENSHOT";
-    }
-
-    .banner-card.app-card .banner-media img{
-      object-fit:contain;
-      background:#fff;
-    }
-
-    .banner-card.app-card .banner-info strong{
-      font-size:16px;
-      line-height:1.35;
-      letter-spacing:-.03em;
-      white-space:nowrap;
-    }
-
-    .banner-card.is-hidden{
-      display:none;
-    }
-
-    .banner-media{
-      position:relative;
-      aspect-ratio:1/1;
-      overflow:hidden;
-      background:linear-gradient(135deg,#f2f4f8,#ffffff);
-      display:grid;
-      place-items:center;
-    }
-
-    .banner-media::before{
-      content:"IMAGE";
-      position:absolute;
-      z-index:0;
-      color:#c8ced8;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.12em;
-    }
-
-    .banner-media img{
-      position:relative;
-      z-index:1;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transition:transform .32s ease;
-    }
-
-    .banner-card:hover .banner-media img{
-      transform:scale(1.025);
-    }
-
-    .banner-info{
-      padding:18px 18px 20px;
-    }
-
-    .banner-info small{
-      display:block;
-      color:var(--accent);
-      font-size:9px;
-      line-height:1.3;
-      font-weight:800;
-      letter-spacing:.06em;
-      margin-bottom:6px;
-    }
-
-    .banner-info strong{
-      display:block;
-      font-size:16px;
-      line-height:1.35;
-      letter-spacing:-.03em;
-    }
-
-    .banner-info span{
-      display:block;
-      margin-top:7px;
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .gallery-empty{
-      grid-column:1/-1;
-      min-height:180px;
-      border:1.5px dashed #d9dde6;
-      border-radius:20px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      color:var(--muted);
-      background:rgba(255,255,255,.42);
-      font-size:14px;
-      padding:28px;
-    }
-
-    .gallery-empty b{
-      display:block;
-      color:var(--text);
-      font-size:16px;
-      margin-bottom:6px;
-    }
-
-
-    .gallery-pagination{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      margin-top:26px;
-      flex-wrap:wrap;
-    }
-
-    .page-btn{
-      min-width:38px;
-      height:38px;
-      padding:0 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--text);
-      font-size:13px;
-      font-weight:800;
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .page-btn:hover{
-      border-color:#cfd4dd;
-      background:#f7f8fa;
-    }
-
-    .page-btn.is-active{
-      background:var(--dark);
-      color:#fff;
-      border-color:var(--dark);
-    }
-
-    .page-btn:disabled{
-      opacity:.35;
-      cursor:default;
-      background:#fff;
-      color:var(--muted);
-    }
-
-    .page-btn:disabled:hover{
-      border-color:var(--line);
-      background:#fff;
-    }
-
-    /* Lightbox */
-    .lightbox{
-      position:fixed;
-      inset:0;
-      z-index:999;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(8,11,18,.86);
-      backdrop-filter:blur(8px);
-      padding:28px;
-    }
-
-    .lightbox.is-open{
-      display:flex;
-    }
-
-    .lightbox-stage{
-      position:relative;
-      width:min(1180px, 94vw);
-      height:min(88vh, 900px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .lightbox-image{
-      max-width:100%;
-      max-height:100%;
-      object-fit:contain;
-      border-radius:14px;
-      box-shadow:0 26px 80px rgba(0,0,0,.38);
-      background:#fff;
-    }
-
-    .lightbox-close,
-    .lightbox-prev,
-    .lightbox-next{
-      position:absolute;
-      border:0;
-      background:rgba(255,255,255,.94);
-      color:#111;
-      display:grid;
-      place-items:center;
-      cursor:pointer;
-      box-shadow:0 8px 28px rgba(0,0,0,.18);
-    }
-
-    .lightbox-close{
-      top:0;
-      right:0;
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      font-size:22px;
-      transform:translate(40%,-40%);
-    }
-
-    .lightbox-prev,
-    .lightbox-next{
-      top:50%;
-      width:48px;
-      height:48px;
-      border-radius:50%;
-      font-size:26px;
-      transform:translateY(-50%);
-    }
-
-    .lightbox-prev{left:-66px}
-    .lightbox-next{right:-66px}
-
-    .lightbox-caption{
-      position:absolute;
-      left:50%;
-      bottom:-46px;
-      transform:translateX(-50%);
-      color:#fff;
-      font-size:13px;
-      white-space:nowrap;
-    }
-
-    .lightbox-hint{
-      display:none;
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      color:rgba(255,255,255,.72);
-      font-size:11px;
-      white-space:nowrap;
-      pointer-events:none;
-    }
-
-    @media (max-width:900px){
-      .banner-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-
-      .banner-grid.app-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-
-      .lightbox-prev{left:8px}
-      .lightbox-next{right:8px}
-    }
-
-    @media (max-width:560px){
-      .gallery-head,
-      .gallery-subhead{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .banner-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:10px;
-      }
-
-      .banner-grid.app-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:10px;
-        touch-action:pan-y;
-      }
-
-      .banner-grid.app-grid .banner-info{
-        padding:10px 9px 11px;
-      }
-
-      .banner-grid.app-grid .banner-info small{
-        font-size:7px;
-        margin-bottom:4px;
-      }
-
-      .banner-grid.app-grid .banner-info strong{
-        font-size:12px;
-        white-space:normal;
-        line-height:1.35;
-      }
-
-      .banner-grid:not(.app-grid) .banner-info{
-        padding:10px 11px 11px;
-      }
-
-      .banner-grid:not(.app-grid) .banner-info strong{
-        font-size:14px;
-      }
-
-      .banner-grid:not(.app-grid) .banner-info small{
-        font-size:8px;
-      }
-
-      .banner-grid:not(.app-grid) .banner-info span{
-        font-size:11px;
-        margin-top:5px;
-      }
-
-      .lightbox{
-        padding:18px;
-      }
-
-      .lightbox-stage{
-        width:100%;
-        height:82vh;
-      }
-
-      .lightbox-close{
-        right:8px;
-        top:8px;
-        width:28px;
-        height:28px;
-        transform:none;
-        background:transparent;
-        color:#fff;
-        box-shadow:none;
-        border-radius:0;
-        font-size:20px;
-        font-weight:400;
-        text-shadow:0 1px 5px rgba(0,0,0,.5);
-      }
-
-      .lightbox-prev,
-      .lightbox-next{
-        display:none !important;
-      }
-
-      .lightbox-caption{
-        bottom:-30px;
-        max-width:90vw;
-        overflow:hidden;
-        text-overflow:ellipsis;
-        font-size:12px;
-      }
-
-      .lightbox-hint{
-        display:block;
-        bottom:-50px;
-      }
-
-      #app-pagination .page-btn:not(:first-child):not(:last-child){
-        display:none;
-      }
-
-      #app-pagination{
-        gap:16px;
-      }
-
-      #app-pagination .page-btn{
-        min-width:42px;
-        width:42px;
-        padding:0;
-        font-size:22px;
-      }
-    }
-
-    .about{
-      margin-top:100px;
-      padding:46px;
-      border-radius:30px;
-      background:var(--dark);
-      color:white;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:40px;
-      align-items:end;
-    }
-
-
-    .mobile-about-break{display:none}
-    .about h2{
-      font-size:34px;
-      line-height:1.25;
-      letter-spacing:-.04em;
-    }
-
-    .about p{
-      color:#b9c0cc;
-      margin-top:18px;
-      max-width:620px;
-      word-break:keep-all;
-    }
-
-    .about-contact{
-      min-height:132px;
-      padding:20px;
-      border-radius:18px;
-      background:#191d26;
-      border:1px solid #242a35;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:flex-start;
-    }
-
-    .about-contact span{
-      color:#949dab;
-      font-size:11px;
-      font-weight:800;
-      letter-spacing:.12em;
-      margin-bottom:8px;
-    }
-
-    .about-contact a{
-      color:#fff;
-      font-size:17px;
-      font-weight:750;
-      letter-spacing:-.02em;
-      transition:.2s ease;
-      word-break:break-all;
-    }
-
-    .about-contact a:hover{
-      color:#ff7a63;
-    }
-
-
-
-
-    .document-section{
-      margin-top:72px;
-      padding-top:56px;
-      border-top:1px solid var(--line);
-    }
-
-    .document-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:22px;
-    }
-
-    .document-head h3{
-      font-size:32px;
-      letter-spacing:-.04em;
-    }
-
-    .document-head p{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .document-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:18px;
-    }
-
-    .document-card{
-      display:block;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:#fff;
-      overflow:hidden;
-      transition:.24s ease;
-    }
-
-    .document-card:hover{
-      transform:translateY(-5px);
-      box-shadow:var(--shadow);
-    }
-
-    .document-cover{
-      aspect-ratio:16/9;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg,#f2f4f8,#fff);
-      color:#b6bdc8;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.1em;
-      overflow:hidden;
-    }
-
-    .document-cover img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center;
-      display:block;
-    }
-
-    .document-info{
-      padding:18px;
-    }
-
-    .document-info small{
-      display:block;
-      color:var(--accent);
-      font-size:9px;
-      line-height:1.3;
-      font-weight:800;
-      letter-spacing:.06em;
-      margin-bottom:6px;
-    }
-
-    .document-info strong{
-      display:block;
-      font-size:16px;
-      line-height:1.35;
-      letter-spacing:-.03em;
-    }
-
-    .document-info span{
-      display:block;
-      margin-top:7px;
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .document-empty{
-      grid-column:1/-1;
-      min-height:180px;
-      border:1.5px dashed #d9dde6;
-      border-radius:20px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      color:var(--muted);
-      padding:28px;
-      background:rgba(255,255,255,.42);
-    }
-
-    .document-empty b{
-      display:block;
-      color:var(--text);
-      font-size:16px;
-      margin-bottom:6px;
-    }
-
-    @media (max-width:900px){
-      .document-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-    }
-
-    @media (max-width:560px){
-      .document-head{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .document-grid{
-        grid-template-columns:1fr;
-      }
-    }
-
-
-
-    .back-to-top{
-      position:fixed;
-      right:24px;
-      bottom:24px;
-      z-index:90;
-      width:46px;
-      height:46px;
-      border:1px solid var(--line);
-      border-radius:50%;
-      background:rgba(255,255,255,.94);
-      color:var(--text);
-      display:grid;
-      place-items:center;
-      font-size:20px;
-      font-weight:800;
-      box-shadow:0 10px 30px rgba(23,26,33,.12);
-      cursor:pointer;
-      opacity:0;
-      visibility:hidden;
-      transform:translateY(10px);
-      transition:.22s ease;
-      backdrop-filter:blur(10px);
-    }
-
-    .back-to-top.is-visible{
-      opacity:1;
-      visibility:visible;
-      transform:translateY(0);
-    }
-
-    .back-to-top:hover{
-      background:var(--dark);
-      color:#fff;
-      border-color:var(--dark);
-    }
-
-    @media (max-width:560px){
-      .back-to-top{
-        right:16px;
-        bottom:16px;
-        width:42px;
-        height:42px;
-      }
-    }
-
-    footer{
-      padding:36px 0 54px;
-      color:#9097a5;
-      font-size:13px;
-    }
-
-    .pc-hero-break{display:inline;}
-
-    @media (max-width:800px){
-      .pc-hero-break{display:none;}
-      header{position:static}
-      .nav-links{display:none}
-      .hero{padding:78px 0 52px}
-      .grid{grid-template-columns:1fr}
-      .section-head{align-items:flex-start;flex-direction:column}
-      .about{
-        grid-template-columns:1fr;
-        padding:32px 24px;
-      }
-    }
-
-    @media (max-width:520px){
-      .wrap{width:min(100% - 28px,1180px)}
-      h1{font-size:41px;font-weight:760}
-      .hero p{font-size:16px}
-      .card-body{padding:22px}
-      .about h2{font-size:clamp(25px,7vw,28px)}
-      .about-title-line{white-space:nowrap}
-      .mobile-about-break{display:inline}
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+    :root { --ink:#214a4b; --teal:#0f7774; --deep:#075454; --yellow:#ffd75e; --cream:#fffaf0; --coral:#ff8171; --sky:#73c8de; --line:rgba(33,74,75,.16); }
+    * { box-sizing:border-box; }
+    html, body { margin:0; min-height:100%; }
+    body { font-family:'Noto Sans KR',system-ui,sans-serif; color:var(--ink); background:radial-gradient(circle at 10% 0%,#fff4b9 0,transparent 28%),linear-gradient(145deg,#fffdf5,#e7f8f8); }
+    button, input { font:inherit; }
+    button { color:inherit; }
+    .shell { width:min(1240px,100%); min-height:100vh; margin:auto; padding:18px clamp(12px,3vw,36px) 28px; }
+    .topbar { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .brand { margin-right:auto; }
+    .eyebrow { font-size:.75rem; font-weight:700; letter-spacing:.13em; color:var(--teal); }
+    h1 { margin:1px 0 0; font-family:'Gaegu',cursive; font-size:clamp(1.75rem,4vw,2.7rem); line-height:1; }
+    .pill { border:1px solid var(--line); background:rgba(255,255,255,.78); border-radius:999px; min-height:44px; padding:0 14px; display:inline-flex; align-items:center; gap:7px; font-weight:700; box-shadow:0 6px 18px rgba(20,91,91,.08); }
+    button.pill { cursor:pointer; }
+    button.pill:hover { background:#fff; transform:translateY(-1px); }
+    #sound { width:44px; min-width:44px; padding:0; justify-content:center; font-size:1.1rem; }
+    button.pill.playing { color:#075454; background:#fff8d5; border-color:#e9c852; animation:bounce-note .8s ease-in-out infinite alternate; }
+    @keyframes bounce-note { to { transform:translateY(-2px) rotate(5deg); } }
+    .progress { display:flex; align-items:center; gap:5px; }
+    .paw { width:13px; height:13px; border:2px solid var(--teal); border-radius:50% 50% 45% 45%; opacity:.28; transition:.25s; }
+    .paw.found { background:var(--yellow); border-color:#ca9621; opacity:1; transform:scale(1.08); }
+    .game-card { overflow:hidden; border:1px solid rgba(255,255,255,.9); border-radius:26px; background:#fff; box-shadow:0 24px 70px rgba(13,86,84,.2); }
+    .scene { position:relative; aspect-ratio:16/9; overflow:hidden; background:#dff1ef; }
+    .scene img { display:block; width:100%; height:100%; object-fit:cover; transition:opacity .35s,transform .7s; }
+    .scene.loading img { opacity:.25; transform:scale(1.015); }
+    .chapter-tag { position:absolute; left:18px; bottom:18px; top:auto; padding:8px 13px; border-radius:999px; background:rgba(255,255,255,.9); font-size:.8rem; font-weight:700; box-shadow:0 4px 16px rgba(0,0,0,.1); }
+    .hotspot { position:absolute; width:clamp(54px,6vw,76px); aspect-ratio:1; border:1px solid transparent; border-radius:50%; cursor:pointer; background:transparent; box-shadow:none; padding:0; transition:transform .2s,background .2s,box-shadow .2s,border-color .2s; }
+    .hotspot::before { content:''; position:absolute; inset:16%; border-radius:50%; border:1px solid rgba(255,255,255,.22); box-shadow:0 0 14px rgba(255,255,255,.16); opacity:.35; animation:soft-glint 2.8s ease-in-out infinite; }
+    .hotspot:hover, .hotspot:focus-visible, .hotspot.activating { transform:scale(1.08); outline:0; border-color:rgba(255,255,255,.92); background:radial-gradient(circle,rgba(255,239,159,.46),rgba(255,215,94,.12) 48%,transparent 70%); box-shadow:0 0 0 8px rgba(255,215,94,.2),0 0 30px rgba(255,239,159,.78); }
+    .hotspot:hover::before, .hotspot:focus-visible::before, .hotspot.activating::before { inset:4%; border-color:rgba(255,255,255,.9); opacity:1; animation:tap-spark .42s ease-out; }
+    .hotspot.done::before { border-color:rgba(255,255,255,.25); box-shadow:0 0 16px rgba(15,119,116,.2); }
+    .hotspot.done:hover, .hotspot.done:focus-visible { background:radial-gradient(circle,rgba(122,222,209,.34),rgba(15,119,116,.08) 52%,transparent 72%); box-shadow:0 0 0 8px rgba(15,119,116,.14),0 0 26px rgba(122,222,209,.5); }
+    .hotspot::after { content:attr(data-label); position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%); white-space:nowrap; padding:6px 10px; border-radius:9px; background:rgba(9,61,61,.92); color:#fff; font-size:.74rem; opacity:0; pointer-events:none; transition:.2s; }
+    .hotspot:hover::after, .hotspot:focus-visible::after { opacity:1; }
+    @keyframes soft-glint { 50% { opacity:.7; box-shadow:0 0 19px rgba(255,255,255,.38); } }
+    @keyframes tap-spark { from { transform:scale(.55); opacity:.2; } to { transform:scale(1); opacity:1; } }
+    .storybar { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:18px; align-items:center; min-height:104px; padding:18px 22px; background:#fff; border-top:1px solid #edf3ef; }
+    .chapter-kicker { color:var(--coral); font-weight:700; font-size:.78rem; letter-spacing:.08em; }
+    .objective { margin:4px 0 0; font-size:clamp(1rem,2vw,1.15rem); line-height:1.65; }
+    .hint-btn { border:0; border-radius:14px; background:var(--teal); color:#fff; padding:13px 16px; font-weight:700; cursor:pointer; box-shadow:0 7px 0 var(--deep); }
+    .hint-btn:active { transform:translateY(4px); box-shadow:0 3px 0 var(--deep); }
+    .mobile-actions { display:none; padding:14px; gap:8px; overflow-x:auto; border-top:1px solid var(--line); background:#fffcf3; }
+    .mobile-actions button { white-space:nowrap; border:1px solid var(--line); border-radius:999px; background:#fff; padding:10px 13px; font-weight:700; }
+    .footerline { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-top:13px; color:#5c7777; font-size:.82rem; }
+    .reset { border:0; background:transparent; text-decoration:underline; cursor:pointer; color:inherit; }
+    dialog { width:min(520px,calc(100% - 26px)); max-height:calc(100dvh - 26px); overflow:auto; border:0; border-radius:24px; padding:0; color:var(--ink); background:var(--cream); box-shadow:0 30px 100px rgba(0,35,35,.38); }
+    dialog::backdrop { background:rgba(7,57,57,.67); backdrop-filter:blur(5px); }
+    .modal { padding:26px; }
+    .modal-head { display:flex; gap:12px; align-items:flex-start; }
+    .modal-icon { width:48px; height:48px; flex:0 0 auto; border-radius:16px; display:grid; place-items:center; background:var(--yellow); font-size:1.55rem; transform:rotate(-4deg); }
+    .modal h2 { font-family:'Gaegu',cursive; font-size:2rem; margin:0; line-height:1; }
+    .modal p { line-height:1.75; margin:14px 0; }
+    .transition-art { width:100%; max-height:270px; object-fit:cover; display:block; margin:18px 0 20px; border-radius:18px; box-shadow:0 10px 28px rgba(13,86,84,.12); }
+    .ending-art { width:100%; max-height:430px; object-fit:cover; display:block; margin:20px 0 18px; border-radius:20px; box-shadow:0 14px 34px rgba(13,86,84,.16); }
+    .ending-copy { text-align:center; }
+    .ending-copy h3 { font-family:'Gaegu',cursive; font-size:2rem; margin:8px 0 6px; color:var(--teal); }
+    .ending-copy p { margin:8px 0; }
+    .close { margin-left:auto; border:0; background:#fff; width:42px; height:42px; border-radius:50%; cursor:pointer; font-size:1.35rem; }
+    .modal-actions { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:9px; margin-top:20px; }
+    .primary, .secondary { min-height:46px; border-radius:13px; padding:0 17px; font-weight:700; cursor:pointer; }
+    .primary { border:0; color:#fff; background:var(--teal); box-shadow:0 5px 0 var(--deep); }
+    .secondary { border:1px solid var(--line); background:#fff; }
+    .case-result { padding:20px 22px; }
+    .case-result .start-card { padding-top:0; }
+    .case-result .start-card p { margin:4px auto 7px; line-height:1.5; }
+    .case-result .items { margin:9px 0 5px; }
+    .case-result .item { min-width:62px; padding:6px; }
+    .case-result .modal-actions { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; margin-top:12px; }
+    .case-result .modal-actions button { width:100%; min-width:0; padding:0 8px; white-space:nowrap; font-size:.9rem; }
+    .code-row { display:flex; gap:9px; margin:15px 0 4px; }
+    .code-row input { width:100%; min-height:52px; border:2px solid #b9d7d2; border-radius:13px; text-align:center; font-size:1.35rem; letter-spacing:.25em; background:#fff; }
+    .sequence { display:flex; gap:9px; flex-wrap:wrap; margin:15px 0; }
+    .sequence button { width:56px; height:56px; border:2px solid #bad8d4; background:#fff; border-radius:16px; font-size:1.45rem; cursor:pointer; }
+    .sequence button.selected { border-color:var(--coral); background:#fff0ed; transform:translateY(-3px); }
+    .puzzle-feedback { min-height:24px; margin:8px 0 0; font-size:.9rem; font-weight:700; color:var(--coral); }
+    .puzzle-feedback.ok { color:var(--teal); }
+    .toast { position:fixed; left:50%; bottom:max(18px,env(safe-area-inset-bottom)); z-index:20; transform:translate(-50%,30px); opacity:0; max-width:calc(100% - 28px); background:#103f40; color:#fff; padding:12px 18px; border-radius:999px; box-shadow:0 12px 30px rgba(0,0,0,.25); font-weight:700; transition:.3s; pointer-events:none; text-align:center; }
+    .toast.show { transform:translate(-50%,0); opacity:1; }
+    .confetti { position:fixed; top:-20px; width:10px; height:16px; z-index:30; animation:fall 2.7s linear forwards; }
+    @keyframes fall { to { transform:translateY(110vh) rotate(720deg); } }
+    .start-card { text-align:center; padding:5px 0 0; }
+    .start-card .cat { font-size:4.5rem; filter:drop-shadow(0 8px 0 rgba(15,119,116,.12)); }
+    .start-card h2 { font-size:2.3rem; margin:8px 0; }
+    .start-card p { margin:8px auto 18px; max-width:390px; }
+    .items { display:flex; justify-content:center; gap:8px; margin:15px 0; }
+    .item { min-width:68px; padding:9px; border-radius:14px; background:#fff; border:1px solid var(--line); font-size:.82rem; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    @media (max-width:720px) {
+      .shell { padding:10px 8px 20px; }
+      .topbar { flex-wrap:wrap; }
+      .brand { width:100%; }
+      h1 { font-size:1.55rem; line-height:1.08; }
+      .eyebrow { font-size:.68rem; }
+      .game-card { border-radius:18px; }
+      .scene { aspect-ratio:16/10; }
+      .chapter-tag { left:10px; bottom:10px; top:auto; padding:5px 9px; font-size:.66rem; background:rgba(255,255,255,.82); box-shadow:0 2px 8px rgba(0,0,0,.08); }
+      .hotspot { width:56px; }
+      .hotspot::after { display:none; }
+      .storybar { grid-template-columns:1fr; padding:15px; gap:12px; }
+      .hint-btn { width:100%; }
+      .mobile-actions { display:flex; }
+      .footerline { padding:0 4px; }
+      .footerline span:first-child { display:none; }
+      .modal { padding:20px; }
+      .modal h2 { font-size:1.55rem; line-height:1.08; }
+      .modal-head { gap:9px; }
+      .modal-icon { width:42px; height:42px; font-size:1.3rem; border-radius:13px; }
+      .close { width:38px; height:38px; font-size:1.2rem; }
+      .transition-art { width:100%; margin:16px 0 18px; max-height:220px; }
+      .ending-art { max-height:360px; margin-top:17px; }
+      .case-result { padding:16px; }
+      .case-result .modal-head { margin-bottom:2px; }
+      .case-result .start-card p { margin:2px auto 5px; font-size:.84rem; line-height:1.4; }
+      .case-result .items { margin:7px 0 3px; gap:5px; }
+      .case-result .item { min-width:0; flex:1; padding:4px 3px; font-size:.72rem; border-radius:10px; }
+      .case-result .modal-actions { margin-top:9px; gap:6px; }
+      .case-result .modal-actions button { min-height:43px; padding:0 5px; font-size:.78rem; }
+    }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="./">JH ARCHIVE<span class="brand-dot">.</span></a>
-      <nav class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#event-gallery">Visual Works</a>
-        <a href="#documents">Documents</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="eyebrow">COCO'S CHURU MYSTERY</div><h1>사라진 츄르를 찾아라!</h1></div>
+      <div class="pill" aria-label="발견한 단서"><span>🐾</span><strong id="count">0</strong><span>/ 14</span></div>
+      <button class="pill" id="sound" type="button" aria-pressed="false" aria-label="배경음악과 효과음 켜기" title="음악 켜기">🎵</button>
+    </header>
 
-  <main>
-    <section class="hero">
-      <div class="wrap">
-        <div class="eyebrow">WEB · DESIGN · AI</div>
-        <h1>기획하고,<br>AI와 함께 만들고,<br>실제로 구현합니다.</h1>
-        <p>
-          웹페이지부터 모바일 콘텐츠까지, 아이디어를 구조화하고 디자인해<span class="pc-hero-break"><br></span>
-          실제로 사용할 수 있는 화면으로 만듭니다.<span class="pc-hero-break"><br></span>
-          업무 프로젝트와 개인 프로젝트를 함께 기록합니다.
-        </p>
-
-        <div class="hero-meta">
-          <span class="chip">Web Planning</span>
-          <span class="chip">UI / UX</span>
-          <span class="chip">AI Creative</span>
-          <span class="chip">HTML / CSS / JS</span>
-          <span class="chip">GitHub Pages</span>
-        </div>
+    <section class="game-card" aria-live="polite">
+      <div class="scene" id="scene">
+        <img id="sceneImage" src="images/living-room.webp" alt="코코가 사라진 츄르의 단서를 찾는 거실">
+        <div class="chapter-tag" id="chapterTag">01 · 사건 현장</div>
+        <div id="hotspots"></div>
       </div>
+      <div class="storybar">
+        <div><div class="chapter-kicker" id="kicker">첫 번째 수사</div><p class="objective" id="objective">사건 현장을 조사해 세 용의자의 흔적을 찾아내자!</p></div>
+        <button class="hint-btn" id="hint" type="button">탐정 코코의 힌트 🐾</button>
+      </div>
+      <div class="mobile-actions" id="mobileActions" aria-label="살펴볼 곳"></div>
     </section>
 
-    <section class="section" id="projects">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <h2>Selected Projects</h2>
-          </div>
-          <p>카드를 누르면 프로젝트 페이지로 이동합니다.</p>
-        </div>
-
-        <div class="grid">
-
-          <!-- 프로젝트 1 -->
-          <a class="card" href="./projects/eck-business/">
-            <div class="thumb business">
-              <div class="thumb-image-wrap" aria-hidden="true">
-                <img class="thumb-image" src="./images/landing-thumbnail.webp" alt="기업 전용 외국어 구독 서비스 랜딩페이지 썸네일" />
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="card-top">
-                <div>
-                  <div class="tag">B2B LANDING PAGE</div>
-                  <h3>기업 전용 외국어 구독 서비스</h3>
-                </div>
-                <div class="arrow">↗</div>
-              </div>
-              <p>
-                기업 고객을 위한 외국어 구독형 교육 서비스 랜딩페이지.
-                서비스 구조, 요금제, 학습 기능 및 문의 흐름을 한 페이지에 구성했습니다.
-              </p>
-              <div class="skills">
-                <span>기획</span>
-                <span>UI 구성</span>
-                <span>HTML / CSS / JS</span>
-                <span>반응형</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- 프로젝트 2 -->
-          <a class="card" href="./projects/chatbot/">
-            <div class="thumb chatbot">
-              <div class="thumb-image-wrap" aria-hidden="true">
-                <img class="thumb-image" src="./images/chatbot-thumbnail.webp" alt="온라인강좌 학습지원 챗봇 썸네일" />
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="card-top">
-                <div>
-                  <div class="tag">CUSTOMER SUPPORT</div>
-                  <h3>온라인강좌 가이드 챗봇</h3>
-                </div>
-                <div class="arrow">↗</div>
-              </div>
-              <p>
-                수강생이 자주 찾는 학습·결제·이용 관련 정보를 빠르게 확인할 수 있도록
-                구성한 고객지원형 챗봇 페이지입니다.
-              </p>
-              <div class="skills">
-                <span>기획</span>
-                <span>UX</span>
-                <span>HTML / CSS / JS</span>
-                <span>반응형</span>
-              </div>
-            </div>
-          </a>
-          <!-- 프로젝트 3 -->
-          <a class="card" href="https://tangyday.github.io/tangycat/projects/romantic-pink/">
-            <div class="thumb wedding">
-              <div class="thumb-image-wrap" aria-hidden="true">
-                <img class="thumb-image" src="./images/romantic-pink-thumbnail.webp" alt="Tangy Cat 모바일 청첩장 썸네일" />
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="card-top">
-                <div>
-                  <div class="tag">PERSONAL · MOBILE WEB</div>
-                  <h3>Tangy Cat 감성 모바일 청첩장</h3>
-                </div>
-                <div class="arrow">↗</div>
-              </div>
-              <p>
-                사진과 이야기를 중심으로 구성한 모바일 청첩장 프로젝트.
-                반응형 레이아웃부터 갤러리, 음악, 방명록 등의 인터랙션까지 직접 기획하고 구현했습니다.
-              </p>
-              <div class="skills">
-                <span>기획</span>
-                <span>UI Design</span>
-                <span>HTML/CSS/JS</span>
-                <span>반응형</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- 프로젝트 4 -->
-          <a class="card" href="https://nyamplay.pages.dev/coco-birthday/" target="_blank" rel="noopener noreferrer">
-            <div class="thumb game">
-              <div class="thumb-image-wrap" aria-hidden="true">
-                <img class="thumb-image" src="./images/coco-birthday-thumbnail.png" alt="코코의 몰래 생일파티 대작전 온라인 방탈출 게임 썸네일" />
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="card-top">
-                <div>
-                  <div class="tag">PERSONAL · WEB GAME</div>
-                  <h3>온라인 방탈출 게임</h3>
-                </div>
-                <div class="arrow">↗</div>
-              </div>
-              <p>
-                「코코의 몰래 생일파티 대작전」을 주제로 제작한 스토리형 온라인 방탈출 게임입니다.
-                공간 탐색, 퀴즈, 아이템 수집과 단계별 인터랙션을 구성하고, AI를 활용해 게임 기획부터 화면 구현까지 제작했습니다.
-              </p>
-              <div class="skills">
-                <span>기획</span>
-                <span>Game UX</span>
-                <span>HTML/CSS/JS</span>
-                <span>AI 활용</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- 프로젝트 5 -->
-          <a class="card" href="https://nyamplay.pages.dev/churu-mystery/" target="_blank" rel="noopener noreferrer">
-            <div class="thumb game">
-              <div class="thumb-image-wrap" aria-hidden="true">
-                <img class="thumb-image" src="./images/churu-mystery-thumbnail.png" alt="사라진 츄르를 찾아라 온라인 방탈출 게임 썸네일" />
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="card-top">
-                <div>
-                  <div class="tag">PERSONAL · WEB GAME</div>
-                  <h3>온라인 방탈출 게임</h3>
-                </div>
-                <div class="arrow">↗</div>
-              </div>
-              <p>
-                「사라진 츄르를 찾아라!」를 주제로 제작한 스토리형 온라인 방탈출 게임입니다.
-                집 안 곳곳의 단서와 퍼즐을 풀며 사라진 츄르의 행방을 찾도록 구성하고, AI를 활용해 게임 기획부터 화면 구현까지 제작했습니다.
-              </p>
-              <div class="skills">
-                <span>기획</span>
-                <span>Game UX</span>
-                <span>HTML/CSS/JS</span>
-                <span>AI 활용</span>
-              </div>
-            </div>
-          </a>
-
-        </div>
-
-
-        <section class="gallery-section" id="event-gallery">
-          <div class="gallery-head">
-            <div>
-              <h2>Visual Works</h2>
-            </div>
-            <p>업무에서 직접 기획·제작한 배너와 앱 화면 디자인을 모았습니다.</p>
-          </div>
-
-          <div class="gallery-group">
-            <div class="gallery-subhead">
-              <h3>월별 이벤트 배너</h3>
-              <p>최신순</p>
-            </div>
-
-            <div class="banner-grid" id="monthly-grid" data-page-size="12" data-mobile-page-size="8">
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.11.webp" data-caption="2026년 11월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.11.webp" alt="2026년 11월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.11</small>
-                <strong>2026년 11월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.10.webp" data-caption="2026년 10월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.10.webp" alt="2026년 10월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.10</small>
-                <strong>2026년 10월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.09.webp" data-caption="2026년 9월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.09.webp" alt="2026년 9월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.09</small>
-                <strong>2026년 9월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.08.webp" data-caption="2026년 8월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.08.webp" alt="2026년 8월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.08</small>
-                <strong>2026년 8월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.07.webp" data-caption="2026년 7월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.07.webp" alt="2026년 7월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.07</small>
-                <strong>2026년 7월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.06.webp" data-caption="2026년 6월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.06.webp" alt="2026년 6월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.06</small>
-                <strong>2026년 6월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.05.webp" data-caption="2026년 5월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.05.webp" alt="2026년 5월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.05</small>
-                <strong>2026년 5월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.04.webp" data-caption="2026년 4월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.04.webp" alt="2026년 4월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.04</small>
-                <strong>2026년 4월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.03.webp" data-caption="2026년 3월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.03.webp" alt="2026년 3월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.03</small>
-                <strong>2026년 3월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.02.webp" data-caption="2026년 2월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.02.webp" alt="2026년 2월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.02</small>
-                <strong>2026년 2월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/26.01.webp" data-caption="2026년 1월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/26.01.webp" alt="2026년 1월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2026.01</small>
-                <strong>2026년 1월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/25.12.webp" data-caption="2025년 12월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/25.12.webp" alt="2025년 12월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2025.12</small>
-                <strong>2025년 12월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/25.11.webp" data-caption="2025년 11월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/25.11.webp" alt="2025년 11월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2025.11</small>
-                <strong>2025년 11월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/25.10.webp" data-caption="2025년 10월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/25.10.webp" alt="2025년 10월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2025.10</small>
-                <strong>2025년 10월 이벤트</strong>
-              </div>
-            </article>
-            <article class="banner-card" data-gallery="monthly" data-src="./images/events/25.08.webp" data-caption="2025년 8월 이벤트">
-              <div class="banner-media">
-                <img src="./images/events/25.08.webp" alt="2025년 8월 이벤트 배너" loading="lazy">
-              </div>
-              <div class="banner-info">
-                <small>MONTHLY EVENT · 2025.08</small>
-                <strong>2025년 8월 이벤트</strong>
-              </div>
-            </article>
-            </div>
-            <div class="gallery-pagination" id="monthly-pagination" aria-label="월별 이벤트 페이지"></div>
-          </div>
-
-          <div class="gallery-group">
-            <div class="gallery-subhead">
-              <h3>기타 배너</h3>
-              <p>캠페인 · 프로모션 · 안내 배너</p>
-            </div>
-
-            <div class="banner-grid" id="other-grid" data-page-size="8" data-mobile-page-size="6">
-              <article class="banner-card" data-gallery="other" data-src="./images/banners/other-banner-01.webp" data-caption="평생교육이용권 신청">
-                <div class="banner-media">
-                  <img src="./images/banners/other-banner-01.webp" alt="평생교육이용권 신청" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>OTHER BANNER · 2026.03</small>
-                  <strong>평생교육이용권 신청</strong>
-                </div>
-              </article>
-
-              <article class="banner-card" data-gallery="other" data-src="./images/banners/other-banner-02.webp" data-caption="디지털 아카데미">
-                <div class="banner-media">
-                  <img src="./images/banners/other-banner-02.webp" alt="디지털 아카데미" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>OTHER BANNER · 2026.01</small>
-                  <strong>디지털 아카데미</strong>
-                </div>
-              </article>
-
-              <article class="banner-card" data-gallery="other" data-src="./images/banners/other-banner-03.webp" data-caption="평생교육 배너">
-                <div class="banner-media">
-                  <img src="./images/banners/other-banner-03.webp" alt="평생교육 배너" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>OTHER BANNER · 2026</small>
-                  <strong>평생교육 배너</strong>
-                </div>
-              </article>
-
-              <article class="banner-card" data-gallery="other" data-src="./images/banners/other-banner-04.webp" data-caption="2026 새해 인사">
-                <div class="banner-media">
-                  <img src="./images/banners/other-banner-04.webp" alt="2026 새해 인사" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>OTHER BANNER · 2026</small>
-                  <strong>2026 새해 인사</strong>
-                </div>
-              </article>
-
-              <article class="banner-card" data-gallery="other" data-src="./images/banners/other-banner-05.webp" data-caption="패키지 이벤트 배너">
-                <div class="banner-media">
-                  <img src="./images/banners/other-banner-05.webp" alt="패키지 이벤트 배너" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>OTHER BANNER · 2025.10</small>
-                  <strong>패키지 이벤트 배너</strong>
-                </div>
-              </article>
-            </div>
-            <div class="gallery-pagination" id="other-pagination" aria-label="기타 배너 페이지"></div>
-          </div>
-
-          <div class="gallery-group">
-            <div class="gallery-subhead">
-              <h3>앱 스크린샷 <small class="section-date">26.09</small></h3>
-              <p>앱스토어 · 플레이스토어 등록용 이미지</p>
-            </div>
-
-            <div class="banner-grid app-grid" id="app-grid" data-page-size="5" data-mobile-page-size="2">
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-01.webp" data-caption="온라인강좌 어플 스크린샷 01">
-                <div class="banner-media">
-                  <img src="./images/app/app-shot-01.webp" alt="온라인강좌 어플 스크린샷 01" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>APP SCREENSHOT · 01</small>
-                  <strong>온라인강좌 어플 스크린샷 01</strong>
-                </div>
-              </article>
-
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-02.webp" data-caption="온라인강좌 어플 스크린샷 02">
-                <div class="banner-media">
-                  <img src="./images/app/app-shot-02.webp" alt="온라인강좌 어플 스크린샷 02" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>APP SCREENSHOT · 02</small>
-                  <strong>온라인강좌 어플 스크린샷 02</strong>
-                </div>
-              </article>
-
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-03.webp" data-caption="온라인강좌 어플 스크린샷 03">
-                <div class="banner-media">
-                  <img src="./images/app/app-shot-03.webp" alt="온라인강좌 어플 스크린샷 03" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>APP SCREENSHOT · 03</small>
-                  <strong>온라인강좌 어플 스크린샷 03</strong>
-                </div>
-              </article>
-
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-04.webp" data-caption="온라인강좌 어플 스크린샷 04">
-                <div class="banner-media">
-                  <img src="./images/app/app-shot-04.webp" alt="온라인강좌 어플 스크린샷 04" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>APP SCREENSHOT · 04</small>
-                  <strong>온라인강좌 어플 스크린샷 04</strong>
-                </div>
-              </article>
-
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-05.webp" data-caption="온라인강좌 어플 스크린샷 05">
-                <div class="banner-media">
-                  <img src="./images/app/app-shot-05.webp" alt="온라인강좌 어플 스크린샷 05" loading="lazy">
-                </div>
-                <div class="banner-info">
-                  <small>APP SCREENSHOT · 05</small>
-                  <strong>온라인강좌 어플 스크린샷 05</strong>
-                </div>
-              </article>
-            </div>
-            <div class="gallery-pagination" id="app-pagination" aria-label="앱 스크린샷 페이지"></div>
-          </div>
-        </section>
-
-
-        <section class="document-section" id="documents">
-          <div class="document-head">
-            <div>
-              <h3>Document Archive</h3>
-            </div>
-            <p>기획서 · 제안서 · 결과물 문서를 웹페이지 형태로 정리합니다.</p>
-          </div>
-
-          <div class="document-grid">
-            <a class="document-card" href="./projects/documents/b2b-proposal-2026-08/">
-              <div class="document-cover">
-                <img src="./projects/documents/b2b-proposal-2026-08/images/page-01.webp" alt="온라인강좌 B2B 서비스 소개서 표지">
-              </div>
-              <div class="document-info">
-                <small>DOCUMENT · 2026.08</small>
-                <strong>온라인강좌 B2B 서비스 소개서</strong>
-                <span>B2B 제안서 · 30 pages</span>
-              </div>
-            </a>
-            <a class="document-card" href="./projects/documents/pc-course-guide-2026-03/">
-              <div class="document-cover">
-                <img src="./projects/documents/pc-course-guide-2026-03/images/page-01.webp" alt="PC 수강가이드 표지">
-              </div>
-              <div class="document-info">
-                <small>DOCUMENT · 2026.03</small>
-                <strong>PC 수강가이드</strong>
-                <span>학습자 이용 가이드 · 15 pages</span>
-              </div>
-            </a>
-          </div>
-        </section>
-
-        <div class="lightbox" id="lightbox" aria-hidden="true">
-          <div class="lightbox-stage">
-            <img class="lightbox-image" id="lightbox-image" src="" alt="">
-            <button class="lightbox-close" id="lightbox-close" type="button" aria-label="닫기">×</button>
-            <button class="lightbox-prev" id="lightbox-prev" type="button" aria-label="이전 이미지">‹</button>
-            <button class="lightbox-next" id="lightbox-next" type="button" aria-label="다음 이미지">›</button>
-            <div class="lightbox-caption" id="lightbox-caption"></div>
-            <div class="lightbox-hint">좌우로 넘겨 다음 이미지를 볼 수 있어요</div>
-          </div>
-        </div>
-
-        <section class="about" id="about">
-          <div>
-            <h2><span class="about-title-line">기획에서 끝나지 않고,</span><br>실제로 쓰이는 화면까지<span class="mobile-about-break"><br></span> 만듭니다.</h2>
-            <p>
-              서비스 운영 경험을 바탕으로 필요한 기능과 콘텐츠 흐름을 먼저 고민합니다.
-              웹 기획과 디자인, AI 활용을 연결해 업무 프로젝트와 개인 아이디어를 실제로 작동하는 결과물로 구현합니다.
-            </p>
-          </div>
-
-          <div class="about-contact" id="contact">
-            <span>CONTACT</span>
-            <a href="mailto:ashtree429@naver.com">ashtree429@naver.com</a>
-          </div>
-        </section>
-</div>
-    </section>
+    <div class="footerline"><span>수상한 물건을 누르면 탐정 코코가 조사해요.</span><button class="reset" id="reset" type="button">처음부터 다시 하기</button></div>
   </main>
 
-  <footer>
-    <div class="wrap">
-      © 2026 JH ARCHIVE · WEB · DESIGN · AI
-    </div>
-  </footer>
+  <dialog id="dialog"><div class="modal" id="modal"></div></dialog>
+  <div class="toast" id="toast" role="status"></div>
 
   <script>
-    (() => {
-
-      function setupPagination(gridId, paginationId) {
-        const grid = document.getElementById(gridId);
-        const pagination = document.getElementById(paginationId);
-        if (!grid || !pagination) return;
-
-        const cards = [...grid.querySelectorAll('.banner-card')];
-        const desktopPageSize = Number(grid.dataset.pageSize || 8);
-        const mobilePageSize = Number(grid.dataset.mobilePageSize || desktopPageSize);
-        let currentPage = 1;
-        let lastPageSize = null;
-
-        const getPageSize = () => (
-          window.matchMedia('(max-width: 560px)').matches
-            ? mobilePageSize
-            : desktopPageSize
-        );
-
-        function makeButton(label, page, active = false, disabled = false) {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'page-btn';
-          btn.textContent = label;
-          if (active) btn.classList.add('is-active');
-          btn.disabled = disabled;
-
-          btn.addEventListener('click', () => {
-            if (disabled || page === currentPage) return;
-            currentPage = page;
-            render();
-
-            const group = grid.closest('.gallery-group');
-            if (group) {
-              const y = group.getBoundingClientRect().top + window.scrollY - 90;
-              window.scrollTo({ top: y, behavior: 'smooth' });
-            }
-          });
-
-          return btn;
-        }
-
-        function render() {
-          const pageSize = getPageSize();
-          const totalPages = Math.max(1, Math.ceil(cards.length / pageSize));
-
-          if (currentPage > totalPages) currentPage = totalPages;
-
-          const start = (currentPage - 1) * pageSize;
-          const end = start + pageSize;
-
-          cards.forEach((card, index) => {
-            card.style.display = (index >= start && index < end) ? '' : 'none';
-          });
-
-          pagination.innerHTML = '';
-
-          if (totalPages <= 1) {
-            pagination.style.display = 'none';
-            return;
-          }
-
-          pagination.style.display = 'flex';
-
-          pagination.appendChild(
-            makeButton('‹', Math.max(1, currentPage - 1), false, currentPage === 1)
-          );
-
-          for (let page = 1; page <= totalPages; page++) {
-            pagination.appendChild(
-              makeButton(String(page), page, page === currentPage, false)
-            );
-          }
-
-          pagination.appendChild(
-            makeButton('›', Math.min(totalPages, currentPage + 1), false, currentPage === totalPages)
-          );
-
-          lastPageSize = pageSize;
-        }
-
-        // 모바일 앱 스크린샷: 카드를 누르지 않은 상태에서도 좌우 스와이프로 페이지 이동
-        if (gridId === 'app-grid') {
-          let touchStartX = 0;
-          let touchStartY = 0;
-
-          grid.addEventListener('touchstart', (e) => {
-            if (!window.matchMedia('(max-width: 560px)').matches) return;
-            const touch = e.changedTouches[0];
-            touchStartX = touch.clientX;
-            touchStartY = touch.clientY;
-          }, { passive: true });
-
-          grid.addEventListener('touchend', (e) => {
-            if (!window.matchMedia('(max-width: 560px)').matches) return;
-            const touch = e.changedTouches[0];
-            const dx = touch.clientX - touchStartX;
-            const dy = touch.clientY - touchStartY;
-
-            // 세로 스크롤과 구분해 가로 스와이프만 처리
-            if (Math.abs(dx) < 45 || Math.abs(dx) <= Math.abs(dy)) return;
-
-            const pageSize = getPageSize();
-            const totalPages = Math.max(1, Math.ceil(cards.length / pageSize));
-
-            if (dx < 0 && currentPage < totalPages) {
-              currentPage += 1;
-              render();
-            } else if (dx > 0 && currentPage > 1) {
-              currentPage -= 1;
-              render();
-            }
-          }, { passive: true });
-        }
-
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(() => {
-            const nextPageSize = getPageSize();
-            if (nextPageSize !== lastPageSize) {
-              currentPage = 1;
-              render();
-            }
-          }, 120);
-        });
-
-        render();
+    const chapters = [
+      {
+        tag:'01 · 사건 현장', image:'images/living-room.webp', alt:'코코가 사라진 츄르의 흔적을 찾는 거실',
+        kicker:'첫 번째 수사 · 현장 감식', objective:'거실에 남은 흔적을 모아 세 용의자의 동선을 복원하자!', hint:'멈춘 시각은 잠긴 서랍의 암호야. 소파 아래의 흔적은 발견된 순서대로 정리해 봐!',
+        spots:[
+          {id:'clock',label:'멈춘 시계',icon:'🕢',x:80,y:14,title:'범행 추정 시각',text:'벽시계가 정확히 <b>오전 7시 30분</b>에 멈춰 있다.\n탐정 코코의 수염이 직감한다. “네 자리 숫자로 바꾸면…?”',type:'clue'},
+          {id:'photo',label:'츄르 보관함',icon:'🗃️',x:50,y:75,title:'텅 빈 보관함',text:'분명 아침에 넣어 둔 연어맛 츄르가 사라졌다!\n안쪽에는 <b>회색 털 한 올</b>과 동그란 바퀴 자국이 남아 있다.',type:'clue'},
+          {id:'drawer',label:'잠긴 서랍',icon:'🔒',x:94,y:36,title:'네 자리 증거 서랍',text:'사건 직전의 사진이 든 서랍이다. 멈춘 시계가 알려준 네 자리 숫자를 입력해 보자!',type:'code',answer:'0730',digits:4,reward:'현장 사진',success:'찰칵! 서랍에서 나나의 꼬리, 로봇청소기, 집사의 슬리퍼가 차례로 찍힌 현장 사진을 찾았다.'},
+          {id:'cushions',label:'소파 아래',icon:'🛋️',x:63,y:48,title:'세 종류의 흔적',text:'소파 아래에서 흔적이 안쪽부터 이어진다.\n<b>발바닥 자국 → 바퀴 자국 → 분홍 슬리퍼 자국</b>\n누가 먼저 다녀갔는지 알 것 같아!',type:'clue'},
+          {id:'ribbon',label:'용의자 흔적',icon:'🕵️',x:67,y:66,title:'용의자 동선 복원',text:'소파 아래에서 발견된 순서대로 용의자를 골라 현장 동선을 완성하자!',type:'sequence',options:['🐾','🤖','🥿'],solution:[0,1,2],reward:'용의자 동선',success:'동선 완성! 나나가 먼저, 로봇청소기가 다음, 집사가 마지막으로 거실을 지나갔다.'}
+        ]
+      },
+      {
+        tag:'02 · 용의자 조사', image:'images/kitchen.webp', alt:'주방에서 나나와 로봇청소기, 집사의 흔적을 조사하는 코코',
+        kicker:'두 번째 수사 · 알리바이 확인', objective:'나나의 알리바이를 확인하고 로봇청소기의 비밀 기록을 열어 보자!', hint:'나나의 아침 행동은 냉장고 메모에 적혀 있어. 로봇의 암호는 오류 횟수와 청소 구역 수를 이어 붙이면 돼!',
+        spots:[
+          {id:'magnets',label:'집사의 메모',icon:'📝',x:17,y:18,title:'나나의 아침 기록',text:'냉장고에 집사의 메모가 붙어 있다.\n<b>물 마시기 → 창밖 구경 → 낮잠</b>\n7시 30분 전후 나나는 이 순서대로 움직였다고 한다.',type:'clue'},
+          {id:'box',label:'나나의 진술',icon:'🐱',x:79,y:54,title:'용의자 1 · 나나',text:'“냐옹! 나는 물 마시고, 새 구경하고, 방석에서 잤다냥!”\n메모와 같은 순서로 나나의 행동을 확인해 보자.',type:'sequence',options:['💧','🪟','💤'],solution:[0,1,2],reward:'나나의 알리바이',success:'집사의 사진 기록과 정확히 일치한다. 나나는 츄르 냄새만 맡았을 뿐, 먹지는 않았다!'},
+          {id:'drawers',label:'청소 기록표',icon:'📋',x:65,y:18,title:'로봇청소기 점검표',text:'오늘 로봇청소기는 문턱에서 <b>2번</b> 멈췄고, 총 <b>6개</b> 구역을 청소했다.\n두 숫자를 순서대로 이어 붙이면 기록함 암호가 된다.',type:'clue'},
+          {id:'cupboard',label:'로봇 기록함',icon:'🔢',x:72,y:26,title:'두 자리 운행 암호',text:'오류 횟수부터 청소 구역 수까지 차례로 이어 붙여 두 자리 암호를 입력하자!',type:'code',answer:'26',digits:2,reward:'은색 포장 조각',success:'기록함에서 츄르 끝부분과 똑같은 은색 포장 조각이 나왔다. 로봇청소기, 아주 수상해!'},
+          {id:'vacuum',label:'로봇청소기',icon:'🤖',x:16,y:67,title:'용의자 2 · 로봇청소기',text:'“삐빅. 저는 먹는 기능이 없습니다.”\n바퀴에 츄르 포장 끄트머리가 걸려 있다. 청소하다 츄르를 어딘가로 끌고 간 모양이다!',type:'collect'}
+        ]
+      },
+      {
+        tag:'03 · 최종 추리', image:'images/rooftop-party.webp', alt:'모은 증거를 펼쳐 놓고 사라진 츄르 사건을 추리하는 코코와 나나',
+        kicker:'마지막 수사 · 범인 지목', objective:'모든 증거를 시간순으로 맞추고 츄르가 있는 곳을 밝혀내자!', hint:'로봇의 이동 경로를 먼저 복원해 봐. 마지막에는 세 용의자가 사건에 관여한 순서가 답이야!',
+        spots:[
+          {id:'garland-clue',label:'운행 지도',icon:'🗺️',x:15,y:18,title:'로봇의 이동 경로',text:'로봇청소기의 기록이 그림으로 남아 있다.\n<b>주방 → 거실 → 베란다 → 충전기</b>\n츄르도 이 길을 따라 끌려간 것 같다!',type:'clue'},
+          {id:'garland',label:'경로 복원 장치',icon:'🧭',x:49,y:72,title:'로봇 동선 맞추기',text:'운행 지도에서 본 순서대로 장소를 눌러 로봇청소기의 동선을 복원하자!',type:'sequence',options:['🍳','🛋️','🌇','🔌'],solution:[0,1,2,3],reward:'로봇의 완전한 동선',success:'동선 복원 완료! 로봇은 츄르를 베란다까지 끌고 갔고, 그곳에서 집사를 만났다.'},
+          {id:'party-note',label:'집사의 쪽지',icon:'💌',x:84,y:73,title:'용의자 3 · 집사의 메모',text:'베란다 바구니에서 쪽지를 찾았다.\n<b>“바닥에 떨어진 츄르 발견! 상할까 봐 냉장고 맨 아래 칸에 넣어 둠.”</b>\n아무래도 사건의 마지막 조각인 것 같다.',type:'clue'},
+          {id:'table',label:'최종 추리 보드',icon:'🔎',x:82,y:18,title:'사건의 전말',text:'츄르에 가장 먼저 접근한 용의자부터 마지막으로 옮긴 용의자까지 순서대로 골라 보자!',type:'sequence',options:['🐱','🤖','🧑'],solution:[0,1,2],finish:true,success:'정답! 나나는 냄새만 맡고, 로봇이 츄르를 끌고 가고, 집사가 냉장고에 안전하게 보관했다!'}
+        ]
       }
+    ];
+    const initial = {chapter:0, found:[], items:[], sound:false, finished:false};
+    localStorage.removeItem('coco-churu-mystery-v1');
+    let state = {...initial, found:[], items:[]};
+    let selected=[];
+    let modalLocked=false,hotspotBusy=false,advancePending=false;
+    const $=s=>document.querySelector(s);
+    const dialog=$('#dialog'), modal=$('#modal'), toast=$('#toast');
 
-      setupPagination('monthly-grid', 'monthly-pagination');
-      setupPagination('other-grid', 'other-pagination');
-      setupPagination('app-grid', 'app-pagination');
-
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImage = document.getElementById('lightbox-image');
-      const lightboxCaption = document.getElementById('lightbox-caption');
-      const closeBtn = document.getElementById('lightbox-close');
-      const prevBtn = document.getElementById('lightbox-prev');
-      const nextBtn = document.getElementById('lightbox-next');
-
-      let currentGroup = [];
-      let currentIndex = 0;
-
-      function getGroupCards(groupName) {
-        return [...document.querySelectorAll(`.banner-card[data-gallery="${groupName}"]`)];
+    function save(){ /* 진행 상황은 현재 페이지에서만 유지하고 새로고침 시 초기화 */ }
+    let audioCtx=null,musicBus=null,musicTimer=null,nextNoteTime=0,musicStep=0;
+    const melody=[659.25,783.99,880,783.99,659.25,523.25,587.33,659.25,698.46,880,1046.5,880,783.99,659.25,587.33,null,659.25,783.99,987.77,880,783.99,659.25,587.33,523.25,587.33,698.46,880,783.99,698.46,659.25,523.25,null];
+    const bass=[261.63,349.23,220,392];
+    function ensureAudio(){
+      if(audioCtx)return audioCtx;
+      const C=window.AudioContext||window.webkitAudioContext;
+      if(!C)return null;
+      audioCtx=new C();musicBus=audioCtx.createGain();musicBus.gain.value=.0001;musicBus.connect(audioCtx.destination);return audioCtx;
+    }
+    function musicNote(freq,when,duration=.24,volume=.035){
+      if(!freq||!audioCtx||!musicBus)return;
+      const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+      o.type='sine';o.frequency.setValueAtTime(freq,when);
+      g.gain.setValueAtTime(.0001,when);g.gain.exponentialRampToValueAtTime(volume,when+.018);g.gain.exponentialRampToValueAtTime(.0001,when+duration);
+      o.connect(g);g.connect(musicBus);o.start(when);o.stop(when+duration+.03);
+    }
+    function scheduleMusic(){
+      if(!state.sound||!audioCtx)return;
+      while(nextNoteTime<audioCtx.currentTime+.45){
+        const note=melody[musicStep%melody.length];musicNote(note,nextNoteTime,.25,.042);
+        if(note)musicNote(note*2,nextNoteTime,.12,.009);
+        if(musicStep%8===0)musicNote(bass[Math.floor(musicStep/8)%bass.length],nextNoteTime,.7,.018);
+        nextNoteTime+=.29;musicStep++;
       }
-
-      function showCurrent() {
-        const card = currentGroup[currentIndex];
-        if (!card) return;
-
-        lightboxImage.src = card.dataset.src;
-        lightboxImage.alt = card.dataset.caption || '';
-        lightboxCaption.textContent = `${card.dataset.caption || ''}  ·  ${currentIndex + 1} / ${currentGroup.length}`;
-
-        const multiple = currentGroup.length > 1;
-        prevBtn.style.display = multiple ? 'grid' : 'none';
-        nextBtn.style.display = multiple ? 'grid' : 'none';
-      }
-
-      function openLightbox(card) {
-        const groupName = card.dataset.gallery;
-        currentGroup = getGroupCards(groupName);
-        currentIndex = currentGroup.indexOf(card);
-        showCurrent();
-        lightbox.classList.add('is-open');
-        lightbox.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('is-open');
-        lightbox.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        lightboxImage.src = '';
-      }
-
-      function move(direction) {
-        if (!currentGroup.length) return;
-        currentIndex = (currentIndex + direction + currentGroup.length) % currentGroup.length;
-        showCurrent();
-      }
-
-      document.addEventListener('click', (e) => {
-        const card = e.target.closest('.banner-card[data-gallery]');
-        if (card) openLightbox(card);
+    }
+    async function startMusic(){
+      const c=ensureAudio();if(!c)return;
+      if(c.state==='suspended')await c.resume();
+      musicBus.gain.cancelScheduledValues(c.currentTime);musicBus.gain.setTargetAtTime(1,c.currentTime,.08);
+      if(musicTimer)return;
+      nextNoteTime=c.currentTime+.05;scheduleMusic();musicTimer=setInterval(scheduleMusic,180);
+    }
+    function stopMusic(){
+      if(musicTimer){clearInterval(musicTimer);musicTimer=null;}
+      if(audioCtx&&musicBus){musicBus.gain.cancelScheduledValues(audioCtx.currentTime);musicBus.gain.setTargetAtTime(.0001,audioCtx.currentTime,.05);}
+    }
+    function beep(freq=660,duration=.08){
+      if(!state.sound)return;const c=ensureAudio();if(!c)return;
+      const o=c.createOscillator(),g=c.createGain();o.frequency.value=freq;o.type='sine';g.gain.setValueAtTime(.07,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+duration);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+duration);
+    }
+    function showToast(message){ toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('show'),2200); }
+    function foundKey(id){ return `${state.chapter}-${id}`; }
+    function addFound(id){ const key=foundKey(id);if(!state.found.includes(key)){state.found.push(key);beep(820);save();}renderHeader(); }
+    function renderHeader(){
+      $('#count').textContent=Math.min(state.found.length,14);
+      const sound=$('#sound');sound.textContent='🎵';sound.classList.toggle('playing',state.sound);sound.setAttribute('aria-pressed',state.sound);sound.setAttribute('aria-label',state.sound?'배경음악과 효과음 끄기':'배경음악과 효과음 켜기');sound.title=state.sound?'음악 끄기':'음악 켜기';
+    }
+    function render(){
+      const c=chapters[state.chapter];
+      $('#scene').classList.add('loading');
+      $('#sceneImage').src=c.image;$('#sceneImage').alt=c.alt;$('#sceneImage').onload=()=>$('#scene').classList.remove('loading');
+      $('#chapterTag').textContent=c.tag;$('#kicker').textContent=c.kicker;$('#objective').textContent=c.objective;
+      const hs=$('#hotspots'),ma=$('#mobileActions');hs.innerHTML='';ma.innerHTML='';
+      c.spots.forEach(s=>{
+        const done=state.found.includes(foundKey(s.id));
+        const b=document.createElement('button');b.className='hotspot'+(done?' done':'');b.style.left=`calc(${s.x}% - 30px)`;b.style.top=`calc(${s.y}% - 30px)`;b.dataset.label=s.label;b.setAttribute('aria-label',`${s.label}${done?' · 조사 완료':''}`);b.onclick=()=>activateHotspot(b,s);hs.appendChild(b);
+        const m=document.createElement('button');m.textContent=`${s.label}${done?' · 완료':''}`;m.onclick=()=>inspect(s);ma.appendChild(m);
       });
+      renderHeader();
+    }
+    function activateHotspot(button,spot){
+      if(hotspotBusy||dialog.open)return;
+      hotspotBusy=true;
+      button.classList.remove('activating');void button.offsetWidth;button.classList.add('activating');
+      setTimeout(()=>{button.classList.remove('activating');hotspotBusy=false;if(!dialog.open)inspect(spot);},180);
+    }
+    function openModal(icon,title,html,actions=[],options={}){
+      modalLocked=Boolean(options.locked);
+      modal.className='modal'+(options.className?` ${options.className}`:'');
+      modal.innerHTML=`<div class="modal-head"><div class="modal-icon">${icon}</div><div><div class="eyebrow">탐정 코코의 수사 기록</div><h2>${title}</h2></div>${modalLocked?'':'<button class="close" aria-label="닫기">×</button>'}</div><div class="modal-body">${html}</div><div class="modal-actions"></div>`;
+      const close=modal.querySelector('.close');if(close)close.onclick=()=>dialog.close();
+      const area=modal.querySelector('.modal-actions');actions.forEach(a=>{const b=document.createElement('button');b.className=a.primary?'primary':'secondary';b.textContent=a.label;b.onclick=a.action;area.appendChild(b);});
+      if(!dialog.open)dialog.showModal();
+    }
+    function inspect(s){
+      if(dialog.open)return;
+      beep(520);
+      if(s.type==='code') return codePuzzle(s);
+      if(s.id==='table'&&!state.found.includes('2-garland')){showToast('로봇의 이동 경로를 먼저 복원해야 한다냥!');return;}
+      if(s.type==='sequence') return sequencePuzzle(s);
+      addFound(s.id);
+      if(s.id==='vacuum'&&!state.items.includes('로봇의 진술'))state.items.push('로봇의 진술');
+      save();
+      openModal(s.icon,s.title,`<p>${s.text.replaceAll('\n','</p><p>')}</p>`,[{label:'좋아!',primary:true,action:()=>{dialog.close();checkAdvance();render();}}]);
+    }
+    function kitchenPuzzlesComplete(){
+      return state.chapter===1 && state.found.includes('1-box') && state.found.includes('1-cupboard');
+    }
+    function showKitchenComplete(){
+      if(advancePending)return;
+      advancePending=true;
+      modalLocked=true;
+      openModal('🕵️','용의자 조사 완료!',`<img class="transition-art" src="images/success-kitchen.webp" alt="로봇청소기 바퀴에서 츄르 포장 조각을 찾아낸 코코와 알리바이가 확인된 나나"><p>나나의 알리바이를 확인하고 로봇청소기에서 결정적인 포장 조각을 찾았다.</p><p>이제 로봇의 전체 동선을 따라가 사건의 마지막 목격자, 집사를 조사하자!</p><div class="items"><div class="item">🐱<br>알리바이</div><div class="item">🤖<br>포장 조각</div></div>`,[{label:'최종 추리로 →',primary:true,action:()=>{state.chapter=2;advancePending=false;modalLocked=false;save();dialog.close();render();}}],{locked:true});
+    }
 
-      closeBtn.addEventListener('click', closeLightbox);
-      prevBtn.addEventListener('click', () => move(-1));
-      nextBtn.addEventListener('click', () => move(1));
+    function codePuzzle(s){
+      const zeros='0'.repeat(s.digits);
+      openModal(s.icon,s.title,`<p>${s.text}</p><div class="code-row"><input id="code" inputmode="numeric" maxlength="${s.digits}" placeholder="${zeros}" aria-label="${s.digits}자리 암호"></div><p class="puzzle-feedback" id="codeFeedback" aria-live="polite"></p>`,[
+        {label:'나중에',action:()=>dialog.close()},{label:'열어 보기',primary:true,action:()=>{const v=$('#code').value;if(v===s.answer){addFound(s.id);if(s.reward&&!state.items.includes(s.reward))state.items.push(s.reward);save();beep(980,.16);modal.querySelector('.modal-body').innerHTML=`<p><b>${s.success}</b></p>`;modal.querySelector('.modal-actions').innerHTML='<button class="primary" id="continue">챙기기</button>';$('#continue').onclick=()=>{dialog.close();if(kitchenPuzzlesComplete()){showKitchenComplete();return;}checkAdvance();render();};}else{beep(220,.15);const feedback=$('#codeFeedback');if(feedback)feedback.textContent='앗, 암호가 아닌 것 같다냥! 단서를 다시 살펴보자.';}}}
+      ]);setTimeout(()=>$('#code')?.focus(),80);
+    }
+    function shuffledOptions(options){
+      const list=options.map((icon,index)=>({icon,index}));
+      for(let i=list.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [list[i],list[j]]=[list[j],list[i]];
+      }
+      // 우연히 원래 순서 그대로면 한 번 회전시켜 정답이 눈에 보이지 않게 한다.
+      if(list.length>1 && list.every((item,pos)=>item.index===pos)) list.push(list.shift());
+      return list;
+    }
 
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('is-open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') move(-1);
-        if (e.key === 'ArrowRight') move(1);
-      });
-
-      let touchStartX = null;
-      lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].clientX;
-      }, { passive: true });
-
-      lightbox.addEventListener('touchend', (e) => {
-        if (touchStartX === null) return;
-        const diff = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(diff) > 50) {
-          move(diff > 0 ? -1 : 1);
-        }
-        touchStartX = null;
-      }, { passive: true });
-    })();
+    function sequencePuzzle(s){
+      selected=[];const icons=s.options;const shuffled=shuffledOptions(icons);
+      openModal(s.icon,s.title,`<p>${s.text}</p><div class="sequence" id="sequence">${shuffled.map(item=>`<button data-i="${item.index}" aria-label="${item.icon}">${item.icon}</button>`).join('')}</div><p id="picked">선택: 아직 없음</p><p class="puzzle-feedback" id="sequenceFeedback" aria-live="polite"></p>`,[
+        {label:'다시 고르기',action:()=>{selected=[];modal.querySelectorAll('.sequence button').forEach(b=>b.classList.remove('selected'));$('#picked').textContent='선택: 아직 없음';const feedback=$('#sequenceFeedback');if(feedback)feedback.textContent='';}},
+        {label:'순서 확인',primary:true,action:()=>{if(selected.join(',')===s.solution.join(',')){addFound(s.id);if(s.reward&&!state.items.includes(s.reward))state.items.push(s.reward);save();beep(980,.16);modal.querySelector('.modal-body').innerHTML=`<p><b>${s.success}</b></p>`;modal.querySelector('.modal-actions').innerHTML=`<button class="primary" id="gotit">${s.finish?'사건 해결!':'증거 챙기기'}</button>`;$('#gotit').onclick=()=>{if(s.finish){state.finished=true;save();return ending();}dialog.close();if(kitchenPuzzlesComplete()){showKitchenComplete();return;}checkAdvance();render();};}else{beep(220,.15);const feedback=$('#sequenceFeedback');if(feedback)feedback.textContent='순서가 다른 것 같다냥! 단서를 다시 보고 다시 골라보자.';}}}
+      ]);
+      modal.querySelectorAll('.sequence button').forEach(b=>b.onclick=()=>{if(selected.length>=s.solution.length||b.classList.contains('selected'))return;selected.push(+b.dataset.i);b.classList.add('selected');$('#picked').textContent='선택: '+selected.map(i=>icons[i]).join(' → ');const feedback=$('#sequenceFeedback');if(feedback)feedback.textContent='';beep(600+selected.length*70);});
+    }
+    function checkAdvance(){
+      if(advancePending)return;
+      if(state.chapter===0&&state.found.includes('0-drawer')&&state.found.includes('0-ribbon')){
+        advancePending=true;
+        setTimeout(()=>openModal('📁','현장 감식 완료!',`<img class="transition-art" src="images/success-living.webp" alt="거실에서 세 용의자의 이동 순서를 밝혀낸 코코"><p>사건 시각과 세 용의자의 이동 순서를 알아냈다. 이제 주방으로 가서 한 명씩 알리바이를 확인하자!</p><div class="items"><div class="item">📷<br>현장 사진</div><div class="item">🧭<br>용의자 동선</div></div>`,[{label:'용의자 조사로 →',primary:true,action:()=>{state.chapter=1;advancePending=false;modalLocked=false;save();dialog.close();render();showToast('두 번째 장소, 주방으로 이동!');}}],{locked:true}),420);
+        return;
+      }
+      if(kitchenPuzzlesComplete()){
+        showKitchenComplete();
+      }
+    }
+    function ending(){
+      confetti();
+      modalLocked=false;
+      openModal('🎉','사라진 츄르 사건 해결!',`<img class="transition-art" src="images/success-deduction.webp" alt="나나와 로봇청소기, 집사의 동선을 연결해 사건의 전말을 밝혀낸 코코"><div class="start-card"><p>코코는 냉장고 맨 아래 칸을 열었다.</p><p>그곳에는 사라진 연어맛 츄르가 차갑고 안전하게 누워 있었다!</p><p><b>범인은 없었다. 모두가 조금씩 수상했을 뿐!</b></p><div class="items"><div class="item">🐾<br>단서 ${Math.min(state.found.length,14)}개</div><div class="item">🧩<br>퍼즐 6개</div><div class="item">😼<br>명탐정 +100</div></div></div>`,[{label:'다시 수사하기',action:()=>restart()},{label:'사건의 결말 보기',primary:true,action:()=>showEndingArt()}],{className:'case-result'});
+    }
+    function showEndingArt(){
+      const endingSrc='images/ending-churu.webp';
+      modalLocked=false;
+      openModal('💛','사건 종결 보고서',`<img class="ending-art" src="${endingSrc}" alt="냉장고에서 찾은 츄르를 사이좋게 나눠 먹는 코코와 나나" onerror="this.onerror=null;this.style.display='none';"><div class="ending-copy"><h3>CASE CLOSED!</h3><p>나나는 냄새만 맡았고,<br>로봇청소기는 끌고 갔고,<br>집사는 안전하게 냉장 보관했어요.</p><p>코코와 나나는 츄르를 사이좋게 나눠 먹었고,<br>로봇청소기에게는 먼지 없는 휴식이 주어졌답니다.</p><p><b>수사에 참여해줘서 고마워요 🐾</b></p></div>`,[{label:'처음부터 다시',action:()=>restart()},{label:'수사 종료',primary:true,action:()=>dialog.close()}]);
+    }
+    function confetti(){const colors=['#ffd75e','#ff8171','#73c8de','#0f7774','#fff'];for(let i=0;i<65;i++){const e=document.createElement('i');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.background=colors[i%colors.length];e.style.animationDelay=Math.random()*1.1+'s';e.style.transform=`rotate(${Math.random()*180}deg)`;document.body.appendChild(e);setTimeout(()=>e.remove(),4200);}}
+    function restart(){state={...initial,found:[],items:[]};save();dialog.close();render();intro();}
+    function intro(){openModal('🔎','사라진 츄르를 찾아라!',`<div class="start-card"><div class="cat">😾</div><p>아침 7시 30분.<br>코코가 몰래 숨겨 둔 연어맛 츄르가 감쪽같이 사라졌다!</p><p>용의자는 <b>나나, 로봇청소기, 집사</b>.<br>집 안의 단서를 모아 사건의 전말을 밝혀 주세요.</p><p><b>수상한 물건을 누르면 조사가 시작돼요.</b></p></div>`,[{label:'수사 시작!',primary:true,action:()=>{dialog.close();beep(720,.12);}}]);}
+    $('#hint').onclick=()=>openModal('💡','탐정 코코의 힌트',`<p>${chapters[state.chapter].hint}</p>`,[{label:'알겠어!',primary:true,action:()=>dialog.close()}]);
+    $('#sound').onclick=async()=>{
+      if(state.sound){beep(520,.09);state.sound=false;stopMusic();}
+      else{state.sound=true;await startMusic();beep(760,.12);showToast('수상한 듯 귀여운 수사 음악이 시작됐다냥 ♪');}
+      save();renderHeader();
+    };
+    $('#reset').onclick=()=>openModal('↩️','수사를 처음부터 할까?',`<p>발견한 단서와 수사 진행 상황이 모두 초기화돼요.</p>`,[{label:'계속 수사할래',action:()=>dialog.close()},{label:'처음부터',primary:true,action:restart}]);
+    dialog.addEventListener('click',e=>{if(e.target===dialog&&!modalLocked)dialog.close();});
+    dialog.addEventListener('cancel',e=>{if(modalLocked)e.preventDefault();});
+    render();
+    setTimeout(intro,250);
   </script>
-
-
-  <script>
-    (() => {
-      const sectionLinks = [
-        { selector: '#projects .grid > a.card', section: 'projects' },
-        { selector: '#documents a.document-card', section: 'documents' }
-      ];
-
-      sectionLinks.forEach(({ selector, section }) => {
-        document.querySelectorAll(selector).forEach((link) => {
-          link.addEventListener('click', () => {
-            sessionStorage.setItem('portfolioReturnSection', section);
-            const returnUrl = `${location.pathname}${location.search}#${section}`;
-            history.replaceState(history.state, '', returnUrl);
-          });
-        });
-      });
-
-      const jumpToSection = () => {
-        const storedSection = sessionStorage.getItem('portfolioReturnSection');
-        const hashSection = location.hash.replace('#', '');
-        const section = storedSection || (['projects', 'documents'].includes(hashSection) ? hashSection : '');
-        if (!section) return;
-
-        sessionStorage.removeItem('portfolioReturnSection');
-        history.scrollRestoration = 'manual';
-
-        const root = document.documentElement;
-        const previousBehavior = root.style.scrollBehavior;
-        root.style.setProperty('scroll-behavior', 'auto', 'important');
-
-        const target = document.getElementById(section);
-        if (target) {
-          window.scrollTo(0, target.offsetTop);
-        }
-
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            if (previousBehavior) {
-              root.style.scrollBehavior = previousBehavior;
-            } else {
-              root.style.removeProperty('scroll-behavior');
-            }
-          });
-        });
-      };
-
-      window.addEventListener('pageshow', jumpToSection);
-
-      if (document.readyState === 'complete') {
-        jumpToSection();
-      }
-    })();
-  </script>
-
-
-  <button class="back-to-top" id="back-to-top" type="button" aria-label="맨 위로 이동">↑</button>
-
-
-  <script>
-    (() => {
-      const btn = document.getElementById('back-to-top');
-      if (!btn) return;
-
-      const toggleButton = () => {
-        btn.classList.toggle('is-visible', window.scrollY > 500);
-      };
-
-      window.addEventListener('scroll', toggleButton, { passive: true });
-      toggleButton();
-
-      btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    })();
-  </script>
-
 </body>
 </html>
