@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="웹, 게임, 디자인과 이모티콘 작업을 모은 JH STUDIO 개인 프로젝트 아카이브" />
+  <meta property="og:title" content="JH STUDIO" />
+  <meta property="og:description" content="Web · Game · Design · Emoticon — 정혜의 개인 프로젝트 스튜디오" />
+  <meta property="og:type" content="website" />
+  <title>JH STUDIO | Web · Design · Play</title>
+  <style>
+    :root{
+      --bg:#fffaf7;
+      --paper:#ffffff;
+      --text:#172036;
+      --muted:#73798a;
+      --line:#ebe6e1;
+      --pink:#ff6f8e;
+      --pink-soft:#fff0f4;
+      --blue:#6d7cff;
+      --blue-soft:#eef0ff;
+      --yellow:#ffd86f;
+      --green:#8bd8b5;
+      --shadow:0 20px 55px rgba(56,44,48,.09);
+      --radius:28px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 8% 2%, rgba(255,111,142,.11), transparent 26%),
+        radial-gradient(circle at 94% 16%, rgba(109,124,255,.10), transparent 24%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .wrap{width:min(1160px,calc(100% - 40px));margin:0 auto}
+
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(16px);
+      background:rgba(255,250,247,.82);
+      border-bottom:1px solid rgba(235,230,225,.82);
+    }
+    .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.04em}
+    .brand-mark{width:32px;height:32px;border-radius:11px;background:linear-gradient(135deg,var(--pink),#ff9d73);display:grid;place-items:center;color:#fff;font-size:13px;box-shadow:0 8px 18px rgba(255,111,142,.22)}
+    .brand span:last-child{font-size:18px}
+    .nav-links{display:flex;gap:22px;color:var(--muted);font-size:13px;font-weight:700}
+    .nav-links a:hover{color:var(--text)}
+
+    .hero{padding:112px 0 76px}
+    .hero-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:50px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--pink-soft);color:#e45577;font-size:12px;font-weight:900;letter-spacing:.06em;margin-bottom:24px}
+    h1{font-size:clamp(50px,7vw,86px);line-height:.99;letter-spacing:-.065em;font-weight:900}
+    .hero p{max-width:650px;margin-top:26px;color:var(--muted);font-size:17px;word-break:keep-all}
+    .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+    .hero-chips span{padding:9px 12px;border:1px solid var(--line);background:#fff;border-radius:999px;font-size:12px;font-weight:800;color:#555d6f}
+
+    .hero-board{position:relative;min-height:390px}
+    .note{position:absolute;border-radius:26px;background:#fff;border:1px solid rgba(235,230,225,.9);box-shadow:var(--shadow);overflow:hidden}
+    .note.one{width:72%;height:260px;right:4%;top:18px;transform:rotate(3deg);background:linear-gradient(145deg,#fff,#fff4f6)}
+    .note.two{width:58%;height:210px;left:0;bottom:5px;transform:rotate(-5deg);background:linear-gradient(145deg,#f5f6ff,#fff)}
+    .note.three{width:112px;height:112px;right:0;bottom:14px;display:grid;place-items:center;background:#fff8d8;transform:rotate(8deg)}
+    .note .mini{padding:24px}
+    .mini-kicker{font-size:11px;font-weight:900;color:var(--pink);letter-spacing:.08em}
+    .mini-title{font-size:24px;font-weight:900;line-height:1.15;letter-spacing:-.04em;margin-top:8px}
+    .mini-lines{display:grid;gap:8px;margin-top:20px}
+    .mini-lines i{display:block;height:7px;border-radius:999px;background:#ececf2}
+    .mini-lines i:nth-child(2){width:78%}.mini-lines i:nth-child(3){width:58%}
+    .paw{font-size:42px;filter:grayscale(1);opacity:.72}
+
+    .section{padding:52px 0 96px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}
+    .section-kicker{font-size:11px;font-weight:900;letter-spacing:.12em;color:var(--pink);margin-bottom:8px}
+    .section h2{font-size:clamp(32px,4vw,48px);letter-spacing:-.05em;line-height:1.1}
+    .section-head p{color:var(--muted);font-size:14px;max-width:470px;text-align:right;word-break:keep-all}
+
+    .project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+    .project-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.26s ease;box-shadow:0 1px 0 rgba(255,255,255,.8) inset}
+    .project-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .project-card.featured{grid-column:1/-1;display:grid;grid-template-columns:1.08fr .92fr}
+    .visual{min-height:300px;padding:22px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .visual::after{content:"";position:absolute;inset:auto -5% -32% auto;width:210px;height:210px;border-radius:50%;background:rgba(255,255,255,.38)}
+    .visual.wedding{background:linear-gradient(135deg,#ffdfe8,#fff4ef 55%,#f5f7ff)}
+    .visual.story{background:linear-gradient(135deg,#fff0b7,#fff8df 48%,#dff3ff)}
+    .visual.mystery{background:linear-gradient(135deg,#e8ecff,#fff1c7 52%,#ffe2d8)}
+    .screen{position:relative;z-index:1;width:92%;height:86%;max-height:320px;border-radius:20px;overflow:hidden;background:#fff;border:1px solid rgba(255,255,255,.8);box-shadow:0 22px 46px rgba(48,42,62,.15)}
+    .screen img{width:100%;height:100%;object-fit:cover;object-position:top center}
+    .card-body{padding:30px}
+    .tag{font-size:11px;font-weight:900;letter-spacing:.08em;color:var(--pink);margin-bottom:10px}
+    .project-card h3{font-size:27px;line-height:1.2;letter-spacing:-.04em}
+    .project-card p{margin-top:14px;color:var(--muted);font-size:14px;word-break:keep-all}
+    .skills{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+    .skills span{font-size:11px;font-weight:800;padding:7px 9px;border-radius:999px;background:#f5f5f8;color:#5c6372}
+    .templates{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .templates b{font-size:11px;padding:7px 10px;border-radius:10px;background:#fff6f8;color:#ce5872;border:1px solid #ffe2e9}
+    .card-link{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:13px;font-weight:900}
+    .card-link span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);transition:.2s}
+    .project-card:hover .card-link span{background:var(--text);color:#fff}
+
+    .design-wrap{background:#171c2a;border-radius:34px;padding:42px;color:#fff}
+    .design-wrap .section-kicker{color:#ff93aa}
+    .design-wrap h2{color:#fff}
+    .design-wrap .section-head p{color:#aeb5c5}
+    .design-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .design-card{background:#202636;border:1px solid #2b3245;border-radius:24px;padding:24px;position:relative;overflow:hidden;min-height:220px;transition:.24s ease}
+    .design-card:hover{transform:translateY(-4px);background:#242b3d}
+    .design-card::after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:-30px;bottom:-30px;background:rgba(255,255,255,.05)}
+    .design-type{font-size:10px;font-weight:900;letter-spacing:.1em;color:#ff9eb3}
+    .design-card h3{font-size:23px;line-height:1.25;letter-spacing:-.035em;margin-top:10px}
+    .design-card p{font-size:13px;color:#aeb5c5;margin-top:11px;max-width:88%;word-break:keep-all}
+    .design-card .card-link{color:#fff}
+    .design-card .card-link span{border-color:#384056}
+    .coming{color:#7f8798;font-size:12px;font-weight:800;margin-top:28px}
+
+    .about{margin-top:88px;padding:46px;border-radius:30px;background:#fff;border:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
+    .about h3{font-size:28px;letter-spacing:-.04em}
+    .about p{margin-top:8px;color:var(--muted);font-size:14px}
+    .about-badge{width:88px;height:88px;border-radius:28px;background:linear-gradient(135deg,var(--pink-soft),var(--blue-soft));display:grid;place-items:center;font-size:30px}
+
+    footer{padding:34px 0 50px;color:#979ca8;font-size:12px}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr}.hero-board{display:none}
+      .project-card.featured{grid-template-columns:1fr}.project-grid{grid-template-columns:1fr}
+      .section-head{align-items:flex-start;flex-direction:column}.section-head p{text-align:left}
+      .design-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      .wrap{width:min(100% - 28px,1160px)}
+      .nav{height:64px}.nav-links{display:none}
+      .hero{padding:76px 0 52px}h1{font-size:48px}
+      .hero p{font-size:15px}
+      .section{padding:42px 0 70px}
+      .visual{min-height:235px;padding:16px}.card-body{padding:22px}
+      .project-card h3{font-size:23px}
+      .design-wrap{padding:28px 18px;border-radius:26px}
+      .about{grid-template-columns:1fr;padding:28px}.about-badge{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top"><span class="brand-mark">JH</span><span>JH STUDIO</span></a>
+      <nav class="nav-links">
+        <a href="#web">Web</a>
+        <a href="#design">Design</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">PERSONAL CREATIVE ARCHIVE</div>
+          <h1>Make it.<br>Play with it.<br>Keep it.</h1>
+          <p>
+            좋아해서 시작한 아이디어를 웹페이지, 게임, 디자인으로 직접 만들어봅니다.<br>
+            JH STUDIO는 정혜의 개인 프로젝트와 작은 실험들을 모아두는 공간입니다.
+          </p>
+          <div class="hero-chips">
+            <span>Web</span><span>Game</span><span>Design</span><span>Emoticon</span><span>AI Creative</span>
+          </div>
+        </div>
+        <div class="hero-board" aria-hidden="true">
+          <div class="note one"><div class="mini"><div class="mini-kicker">WEB + PLAY</div><div class="mini-title">작게 떠올리고<br>직접 구현하기.</div><div class="mini-lines"><i></i><i></i><i></i></div></div></div>
+          <div class="note two"><div class="mini"><div class="mini-kicker">JH STUDIO</div><div class="mini-title">Personal<br>Creative Lab</div><div class="mini-lines"><i></i><i></i></div></div></div>
+          <div class="note three"><div class="paw">✦</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="web">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-kicker">01 · WEB PROJECTS</div><h2>웹페이지 & 게임</h2></div>
+          <p>모바일 웹부터 인터랙티브 게임까지, 아이디어를 화면 구조와 사용자 흐름으로 구현한 개인 프로젝트입니다.</p>
+        </div>
+
+        <div class="project-grid">
+          <a class="project-card featured" href="https://tangyday.github.io/tangycat/projects/romantic-pink/" target="_blank" rel="noopener noreferrer">
+            <div class="visual wedding"><div class="screen"><img src="./images/romantic-pink-thumbnail.webp" alt="Tangy Cat 감성 모바일 청첩장 썸네일"></div></div>
+            <div class="card-body">
+              <div class="tag">MOBILE WEB · INVITATION</div>
+              <h3>Tangy Cat 감성 모바일 청첩장</h3>
+              <p>사진과 이야기를 중심으로 구성한 모바일 청첩장 프로젝트입니다. 반응형 레이아웃부터 갤러리, 음악, 방명록 등 모바일에서 자연스럽게 사용할 수 있는 인터랙션을 직접 기획하고 구현했습니다.</p>
+              <div class="templates"><b>Romantic Pink</b><b>Minimal White</b><b>Sky Garden</b></div>
+              <div class="skills"><span>기획</span><span>UI Design</span><span>HTML/CSS/JS</span><span>반응형</span></div>
+              <div class="card-link">샘플 보기 <span>↗</span></div>
+            </div>
+          </a>
+
+          <a class="project-card" href="https://nyamplay.pages.dev/coco-birthday/" target="_blank" rel="noopener noreferrer">
+            <div class="visual story"><div class="screen"><img src="./images/coco-birthday-thumbnail.png" alt="코코의 몰래 생일파티 대작전 썸네일"></div></div>
+            <div class="card-body">
+              <div class="tag">STORY WEB GAME</div>
+              <h3>스토리형 온라인 방탈출 게임</h3>
+              <p>「코코의 몰래 생일파티 대작전」을 테마로 제작한 스토리형 웹게임입니다. 공간 탐색, 퀴즈, 아이템 수집과 단계별 미션을 구성하고 AI를 활용해 기획부터 화면 구현까지 제작했습니다.</p>
+              <div class="skills"><span>기획</span><span>Game UX</span><span>HTML/CSS/JS</span><span>AI 활용</span></div>
+              <div class="card-link">게임 플레이 <span>↗</span></div>
+            </div>
+          </a>
+
+          <a class="project-card" href="https://nyamplay.pages.dev/churu-mystery/" target="_blank" rel="noopener noreferrer">
+            <div class="visual mystery"><div class="screen"><img src="./images/churu-mystery-thumbnail.png" alt="사라진 츄르를 찾아라 썸네일"></div></div>
+            <div class="card-body">
+              <div class="tag">MYSTERY WEB GAME</div>
+              <h3>추리형 온라인 방탈출 게임</h3>
+              <p>「사라진 츄르를 찾아라!」를 테마로 제작한 추리형 웹게임입니다. 집 안 곳곳의 단서를 탐색하고 퍼즐을 풀어 사건의 결말을 찾아가는 구조로, 탐색 흐름과 인터랙션을 중심으로 구성했습니다.</p>
+              <div class="skills"><span>기획</span><span>Puzzle UX</span><span>HTML/CSS/JS</span><span>AI 활용</span></div>
+              <div class="card-link">게임 플레이 <span>↗</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="design">
+      <div class="wrap design-wrap">
+        <div class="section-head">
+          <div><div class="section-kicker">02 · DESIGN / EMOTICON</div><h2>디자인 & 이모티콘</h2></div>
+          <p>코코와 나나를 중심으로 만든 캐릭터 작업과 이모티콘 프로젝트를 모아두는 섹션입니다.</p>
+        </div>
+
+        <div class="design-grid">
+          <a class="design-card" href="https://creators.ogq.me/share/sticker/65a5338175a70" target="_blank" rel="noopener noreferrer">
+            <div class="design-type">NAVER OGQ STICKER</div>
+            <h3>코코랑 나나의 해피 일상</h3>
+            <p>코코와 나나의 일상적인 표정과 상황을 귀엽고 편하게 사용할 수 있도록 구성한 캐릭터 스티커입니다.</p>
+            <div class="card-link">스티커 보기 <span>↗</span></div>
+          </a>
+
+          <a class="design-card" href="https://creators.ogq.me/share/sticker/65a531ace37be" target="_blank" rel="noopener noreferrer">
+            <div class="design-type">NAVER OGQ STICKER</div>
+            <h3>코코의 일상</h3>
+            <p>코코의 표정과 행동을 중심으로 제작한 캐릭터 스티커 시리즈입니다.</p>
+            <div class="card-link">스티커 보기 <span>↗</span></div>
+          </a>
+        </div>
+        <div class="coming">LINE · KAKAO · CHARACTER DESIGN 작업도 이 섹션에 계속 추가할 수 있어요.</div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap about">
+        <div>
+          <h3>JH STUDIO는 개인 작업을 위한 작은 실험실입니다.</h3>
+          <p>업무 포트폴리오와 분리해, 좋아해서 시작한 웹·게임·디자인 작업을 조금 더 자유롭게 기록합니다.</p>
+        </div>
+        <div class="about-badge">✦</div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">© 2026 JH STUDIO. Personal creative archive.</div></footer>
+</body>
+</html>
