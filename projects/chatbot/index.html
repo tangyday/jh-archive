@@ -1008,6 +1008,7 @@ html body #eckv3-widget button.eckv3-choice.eckv3-packageChoice:hover {
     }
     // 학습자가 메뉴를 선택한 직후에는, 새 화면의 '다음 챗봇 응답'이 채팅창 맨 위에 오도록 표시합니다.
     let scrollAfterSelection = false;
+    let directCultureSearch = false; // 국가명 검색 시 국가 선택 목록 생략
     function grid(items, click, formatter) {
       setFocusTarget(null);
       const g=document.createElement('div'); g.className='eckv3-grid';
@@ -1424,6 +1425,7 @@ html body #eckv3-widget button.eckv3-choice.eckv3-packageChoice:hover {
       renderScreen();
       if(!state.navDone && state.step !== 'lang') appendBottomNav();
       isRenderingScreen = false;
+      directCultureSearch = false;
 
       // 학습자가 선택한 경우에는 이전 대화의 맨 위가 아니라,
       // 가장 최근 사용자 선택 바로 다음에 나오는 챗봇 응답/메뉴부터 화면 맨 위에 보이게 합니다.
@@ -1460,7 +1462,19 @@ html body #eckv3-widget button.eckv3-choice.eckv3-packageChoice:hover {
         showPackages(state.lang);
         return;
       }
+      if(state.step==='fPackage' || state.step==='kPackage') {
+        bubble(state.step==='fPackage' ? `외국인을 위한 강좌 · ${state.fBase} · 한국어` : `한국어 · ${state.kBase}`, 'user');
+        bubble('📦 패키지', 'user');
+        showForeignPackages(state.step==='fPackage' ? state.fBase : state.kBase, '한국어');
+        return;
+      }
       if(state.step==='culture') {
+        // 검색창에서 국가명을 직접 입력한 경우에는 국가 목록을 거치지 않습니다.
+        if(directCultureSearch && state.cultureCountry) {
+          bubble(state.cultureCountry, 'user');
+          showCultureResult(state.cultureCountry);
+          return;
+        }
         bubble('이문화 특강', 'user');
         const cultureIntro = bubble('언어 공부와는 결이 다른, 세계 각국의 문화를 가볍게 만나보는 특강이에요. 관심 있는 나라를 골라주세요.');
         helper('나라 이름은 가나다 순으로 정렬됩니다.');
@@ -1500,15 +1514,18 @@ html body #eckv3-widget button.eckv3-choice.eckv3-packageChoice:hover {
         const fTotalAll = fCardsForComboAll(state.fBase, state.fTarget).length;
         // 외국인을 위한 강좌 > 중국어 > 한국어는 '회화 및 문법 / 비즈니스' 분류를 반드시 표시
         const forcePurposeSplit = ['중국어','한국어'].includes(state.fBase) && state.fTarget === '한국어';
-        if(fTotalAll <= SIMPLE_MAX && !forcePurposeSplit) {
+        if(fTotalAll <= SIMPLE_MAX && !forcePurposeSplit && state.fTarget !== '한국어') {
           state.step='fResult';
           return showForeignerResult(fCardsForComboAll(state.fBase, state.fTarget), '선택하신 언어에 맞는 강좌를 추천해드릴게요!');
         }
-        if(fPurposes.length <= 1) {
+        const hasTopikPackage = state.fTarget === '한국어' && ['베트남어', '몽골어'].includes(state.fBase);
+        if(fPurposes.length <= 1 && !hasTopikPackage) {
           state.fPurpose = fPurposes[0] || null;
         } else {
           bubble('학습 목적을 선택해 주세요.');
-          grid(fPurposes, chooseForeignerPurpose);
+          const fChoices = grid(hasTopikPackage ? [...fPurposes, '📦 패키지'] : fPurposes,
+            label => label === '📦 패키지' ? chooseForeignerTopikPackage() : chooseForeignerPurpose(label));
+          if(hasTopikPackage) highlightPackageChoice(fChoices);
           if(!state.fPurpose) return;
           bubble(state.fPurpose, 'user');
         }
@@ -1553,11 +1570,14 @@ html body #eckv3-widget button.eckv3-choice.eckv3-packageChoice:hover {
           state.step='kResult';
           return showKoreanResult(kCardsForBaseAll(state.kBase), '선택하신 언어에 맞는 강좌를 추천해드릴게요!');
         }
-        if(kPurposes.length <= 1) {
+        const hasTopikPackage = ['베트남어', '몽골어'].includes(state.kBase);
+        if(kPurposes.length <= 1 && !hasTopikPackage) {
           state.kPurpose = kPurposes[0] || null;
         } else {
           bubble('학습 목적을 선택해 주세요.');
-          grid(kPurposes, chooseKoreanPurpose);
+          const kChoices = grid(hasTopikPackage ? [...kPurposes, '📦 패키지'] : kPurposes,
+            label => label === '📦 패키지' ? chooseKoreanTopikPackage() : chooseKoreanPurpose(label));
+          if(hasTopikPackage) highlightPackageChoice(kChoices);
           if(!state.kPurpose) return;
           bubble(state.kPurpose, 'user');
         }
@@ -1762,6 +1782,20 @@ html body #eckv3-widget button.eckv3-choice.eckv3-packageChoice:hover {
     }
     // showExtraRecommendations()의 foreignerCatalog 버전. 외국인을 위한 강좌 / 한국어 전용 흐름 결과 하단에
     // "시리즈 강좌 보기" · "이런 강좌도 있어요" · "패키지 보기" 버튼을 필요할 때 추가합니다.
+    // 한국어 · 외국인을 위한 강좌에서 언어권별로 TOPIK 패키지 하나씩 보여줍니다.
+    function highlightPackageChoice(container) {
+      const button = Array.from(container.querySelectorAll('button'))
+        .find(b => b.textContent.trim() === '📦 패키지');
+      if(button) button.classList.add('eckv3-packageChoice');
+    }
+    function chooseForeignerTopikPackage() {
+      state.fPurpose=null; state.fLevel=null;
+      state.step='fPackage'; render();
+    }
+    function chooseKoreanTopikPackage() {
+      state.kPurpose=null; state.kLevel=null;
+      state.step='kPackage'; render();
+    }
     function foreignPackages(base, target) {
       if(target !== '한국어') return packagesForLang(target);
       return packages.filter(p => (p.exams || []).includes('TOPIK') && (p.langs || []).includes(base));
@@ -1863,6 +1897,8 @@ html body #eckv3-widget button.eckv3-choice.eckv3-packageChoice:hover {
     function chooseTarget(label) { state.target=label; state.picked.target=true; state.step='result'; render(); }
     function goBack() {
       if(state.step==='package') { state.step='purpose'; render(); return; }
+      if(state.step==='fPackage') { state.step='fPurpose'; state.fPurpose=null; state.fLevel=null; render(); return; }
+      if(state.step==='kPackage') { state.step='kPurpose'; state.kPurpose=null; state.kLevel=null; render(); return; }
       if(state.step==='culture') {
         if(state.cultureCountry) { state.cultureCountry=null; render(); return; }
         state.step='lang'; render(); return;
@@ -2046,6 +2082,7 @@ html body #eckv3-widget button.eckv3-choice.eckv3-packageChoice:hover {
         if(input) input.value = '';
         state.cultureCountry = foundCountry;
         state.step = 'culture';
+        directCultureSearch = true;
         render();
         return;
       }
