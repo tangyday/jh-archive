@@ -672,6 +672,36 @@
       font-size:14px;
     }
 
+
+    /* 앱 스크린샷은 하나의 대분류 아래 앱별로 구분 */
+    .app-screenshots-group .gallery-subhead{margin-bottom:28px}
+    .app-project + .app-project{
+      margin-top:54px;
+    }
+    /* 같은 App Screenshots 항목 안에서는 짧고 은은한 보조 구분선 사용 */
+    .app-project + .app-project::before{
+      content:"";
+      display:block;
+      width:72%;
+      height:1px;
+      margin:0 auto 40px;
+      background:linear-gradient(90deg,transparent,#e3e7ef 18%,#e3e7ef 82%,transparent);
+    }
+    .app-project-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .app-project-head h4{font-size:20px;letter-spacing:-.035em}
+    .app-project-head p{font-size:13px;color:var(--muted)}
+    @media(max-width:560px){
+      .app-project-head{align-items:flex-start;flex-direction:column;gap:5px}
+      .app-project + .app-project{margin-top:42px}
+      .app-project + .app-project::before{width:76%;margin-bottom:32px}
+    }
+
     .gallery-group + .gallery-group{
       margin-top:68px;
       padding-top:56px;
@@ -1808,11 +1838,16 @@
             <div class="gallery-pagination" id="other-pagination" aria-label="기타 배너 페이지"></div>
           </div>
 
-          <div class="gallery-group">
+          <div class="gallery-group app-screenshots-group">
             <div class="gallery-subhead">
-              <h3>온라인강좌 앱 <small class="section-date">26.09</small></h3>
+              <h3>App Screenshots</h3>
               <p>앱스토어 · 플레이스토어 등록용 이미지</p>
             </div>
+
+            <div class="app-project">
+              <div class="app-project-head">
+                <h4>ECK온라인강좌 <small class="section-date">26.09</small></h4>
+              </div>
 
             <div class="banner-grid app-grid" id="eck-app-grid" data-page-size="5" data-mobile-page-size="2">
 <article class="banner-card app-card" data-gallery="eck-app" data-src="./images/app/app-shot-01.webp" data-caption="온라인강좌 어플 스크린샷 01">
@@ -1867,14 +1902,13 @@
 
 
             </div>
-            <div class="gallery-pagination" id="eck-app-pagination" aria-label="온라인강좌 앱 스크린샷 페이지"></div>
-          </div>
-
-          <div class="gallery-group">
-            <div class="gallery-subhead">
-              <h3>nyamplay 앱 <small class="section-date">26.10</small></h3>
-              <p>Google Play 등록용 게임 앱 스크린샷</p>
+            <div class="gallery-pagination" id="eck-app-pagination" aria-label="ECK온라인강좌 앱 스크린샷 페이지"></div>
             </div>
+
+            <div class="app-project">
+              <div class="app-project-head">
+                <h4>Nyamplay <small class="section-date">26.10</small></h4>
+              </div>
             <div class="banner-grid app-grid" id="nyamplay-app-grid" data-page-size="5" data-mobile-page-size="2">
               <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-01.webp" data-caption="nyamplay 앱 스크린샷 01">
                 <div class="banner-media">
@@ -1956,7 +1990,8 @@
                 </div>
               </article>
             </div>
-            <div class="gallery-pagination" id="nyamplay-app-pagination" aria-label="nyamplay 앱 스크린샷 페이지"></div>
+            <div class="gallery-pagination" id="nyamplay-app-pagination" aria-label="Nyamplay 앱 스크린샷 페이지"></div>
+            </div>
           </div>
         </section>
 
