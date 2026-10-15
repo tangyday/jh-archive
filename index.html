@@ -1083,15 +1083,15 @@
         bottom:-50px;
       }
 
-      #app-pagination .page-btn:not(:first-child):not(:last-child){
+      .app-grid + .gallery-pagination .page-btn:not(:first-child):not(:last-child){
         display:none;
       }
 
-      #app-pagination{
+      .app-grid + .gallery-pagination{
         gap:16px;
       }
 
-      #app-pagination .page-btn{
+      .app-grid + .gallery-pagination .page-btn{
         min-width:42px;
         width:42px;
         padding:0;
@@ -1810,12 +1810,12 @@
 
           <div class="gallery-group">
             <div class="gallery-subhead">
-              <h3>앱 스크린샷 <small class="section-date">26.09</small></h3>
+              <h3>온라인강좌 앱 <small class="section-date">26.09</small></h3>
               <p>앱스토어 · 플레이스토어 등록용 이미지</p>
             </div>
 
-            <div class="banner-grid app-grid" id="app-grid" data-page-size="5" data-mobile-page-size="2">
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-01.webp" data-caption="온라인강좌 어플 스크린샷 01">
+            <div class="banner-grid app-grid" id="eck-app-grid" data-page-size="5" data-mobile-page-size="2">
+<article class="banner-card app-card" data-gallery="eck-app" data-src="./images/app/app-shot-01.webp" data-caption="온라인강좌 어플 스크린샷 01">
                 <div class="banner-media">
                   <img src="./images/app/app-shot-01.webp" alt="온라인강좌 어플 스크린샷 01" loading="lazy">
                 </div>
@@ -1825,7 +1825,7 @@
                 </div>
               </article>
 
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-02.webp" data-caption="온라인강좌 어플 스크린샷 02">
+<article class="banner-card app-card" data-gallery="eck-app" data-src="./images/app/app-shot-02.webp" data-caption="온라인강좌 어플 스크린샷 02">
                 <div class="banner-media">
                   <img src="./images/app/app-shot-02.webp" alt="온라인강좌 어플 스크린샷 02" loading="lazy">
                 </div>
@@ -1835,7 +1835,7 @@
                 </div>
               </article>
 
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-03.webp" data-caption="온라인강좌 어플 스크린샷 03">
+<article class="banner-card app-card" data-gallery="eck-app" data-src="./images/app/app-shot-03.webp" data-caption="온라인강좌 어플 스크린샷 03">
                 <div class="banner-media">
                   <img src="./images/app/app-shot-03.webp" alt="온라인강좌 어플 스크린샷 03" loading="lazy">
                 </div>
@@ -1845,7 +1845,7 @@
                 </div>
               </article>
 
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-04.webp" data-caption="온라인강좌 어플 스크린샷 04">
+<article class="banner-card app-card" data-gallery="eck-app" data-src="./images/app/app-shot-04.webp" data-caption="온라인강좌 어플 스크린샷 04">
                 <div class="banner-media">
                   <img src="./images/app/app-shot-04.webp" alt="온라인강좌 어플 스크린샷 04" loading="lazy">
                 </div>
@@ -1855,7 +1855,7 @@
                 </div>
               </article>
 
-<article class="banner-card app-card" data-gallery="app" data-src="./images/app/app-shot-05.webp" data-caption="온라인강좌 어플 스크린샷 05">
+<article class="banner-card app-card" data-gallery="eck-app" data-src="./images/app/app-shot-05.webp" data-caption="온라인강좌 어플 스크린샷 05">
                 <div class="banner-media">
                   <img src="./images/app/app-shot-05.webp" alt="온라인강좌 어플 스크린샷 05" loading="lazy">
                 </div>
@@ -1866,87 +1866,97 @@
               </article>
 
 
-              <article class="banner-card app-card" data-gallery="app" data-src="./images/app/nyamplay-app-shot-01.webp" data-caption="Nyamplay 앱 스크린샷 01">
+            </div>
+            <div class="gallery-pagination" id="eck-app-pagination" aria-label="온라인강좌 앱 스크린샷 페이지"></div>
+          </div>
+
+          <div class="gallery-group">
+            <div class="gallery-subhead">
+              <h3>nyamplay 앱 <small class="section-date">26.10</small></h3>
+              <p>Google Play 등록용 게임 앱 스크린샷</p>
+            </div>
+            <div class="banner-grid app-grid" id="nyamplay-app-grid" data-page-size="5" data-mobile-page-size="2">
+              <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-01.webp" data-caption="nyamplay 앱 스크린샷 01">
                 <div class="banner-media">
-                  <img src="./images/app/nyamplay-app-shot-01.webp" alt="Nyamplay 앱 스크린샷 01" loading="lazy">
+                  <img src="./images/app/nyamplay-app-shot-01.webp" alt="nyamplay 앱 스크린샷 01" loading="lazy">
                 </div>
                 <div class="banner-info">
                   <small>NYAMPLAY APP · 01</small>
-                  <strong>Nyamplay 앱 스크린샷 01</strong>
+                  <strong>nyamplay 앱 스크린샷 01</strong>
                 </div>
               </article>
 
-              <article class="banner-card app-card" data-gallery="app" data-src="./images/app/nyamplay-app-shot-02.webp" data-caption="Nyamplay 앱 스크린샷 02">
+              <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-02.webp" data-caption="nyamplay 앱 스크린샷 02">
                 <div class="banner-media">
-                  <img src="./images/app/nyamplay-app-shot-02.webp" alt="Nyamplay 앱 스크린샷 02" loading="lazy">
+                  <img src="./images/app/nyamplay-app-shot-02.webp" alt="nyamplay 앱 스크린샷 02" loading="lazy">
                 </div>
                 <div class="banner-info">
                   <small>NYAMPLAY APP · 02</small>
-                  <strong>Nyamplay 앱 스크린샷 02</strong>
+                  <strong>nyamplay 앱 스크린샷 02</strong>
                 </div>
               </article>
 
-              <article class="banner-card app-card" data-gallery="app" data-src="./images/app/nyamplay-app-shot-03.webp" data-caption="Nyamplay 앱 스크린샷 03">
+              <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-03.webp" data-caption="nyamplay 앱 스크린샷 03">
                 <div class="banner-media">
-                  <img src="./images/app/nyamplay-app-shot-03.webp" alt="Nyamplay 앱 스크린샷 03" loading="lazy">
+                  <img src="./images/app/nyamplay-app-shot-03.webp" alt="nyamplay 앱 스크린샷 03" loading="lazy">
                 </div>
                 <div class="banner-info">
                   <small>NYAMPLAY APP · 03</small>
-                  <strong>Nyamplay 앱 스크린샷 03</strong>
+                  <strong>nyamplay 앱 스크린샷 03</strong>
                 </div>
               </article>
 
-              <article class="banner-card app-card" data-gallery="app" data-src="./images/app/nyamplay-app-shot-04.webp" data-caption="Nyamplay 앱 스크린샷 04">
+              <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-04.webp" data-caption="nyamplay 앱 스크린샷 04">
                 <div class="banner-media">
-                  <img src="./images/app/nyamplay-app-shot-04.webp" alt="Nyamplay 앱 스크린샷 04" loading="lazy">
+                  <img src="./images/app/nyamplay-app-shot-04.webp" alt="nyamplay 앱 스크린샷 04" loading="lazy">
                 </div>
                 <div class="banner-info">
                   <small>NYAMPLAY APP · 04</small>
-                  <strong>Nyamplay 앱 스크린샷 04</strong>
+                  <strong>nyamplay 앱 스크린샷 04</strong>
                 </div>
               </article>
 
-              <article class="banner-card app-card" data-gallery="app" data-src="./images/app/nyamplay-app-shot-05.webp" data-caption="Nyamplay 앱 스크린샷 05">
+              <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-05.webp" data-caption="nyamplay 앱 스크린샷 05">
                 <div class="banner-media">
-                  <img src="./images/app/nyamplay-app-shot-05.webp" alt="Nyamplay 앱 스크린샷 05" loading="lazy">
+                  <img src="./images/app/nyamplay-app-shot-05.webp" alt="nyamplay 앱 스크린샷 05" loading="lazy">
                 </div>
                 <div class="banner-info">
                   <small>NYAMPLAY APP · 05</small>
-                  <strong>Nyamplay 앱 스크린샷 05</strong>
+                  <strong>nyamplay 앱 스크린샷 05</strong>
                 </div>
               </article>
 
-              <article class="banner-card app-card" data-gallery="app" data-src="./images/app/nyamplay-app-shot-06.webp" data-caption="Nyamplay 앱 스크린샷 06">
+              <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-06.webp" data-caption="nyamplay 앱 스크린샷 06">
                 <div class="banner-media">
-                  <img src="./images/app/nyamplay-app-shot-06.webp" alt="Nyamplay 앱 스크린샷 06" loading="lazy">
+                  <img src="./images/app/nyamplay-app-shot-06.webp" alt="nyamplay 앱 스크린샷 06" loading="lazy">
                 </div>
                 <div class="banner-info">
                   <small>NYAMPLAY APP · 06</small>
-                  <strong>Nyamplay 앱 스크린샷 06</strong>
+                  <strong>nyamplay 앱 스크린샷 06</strong>
                 </div>
               </article>
 
-              <article class="banner-card app-card" data-gallery="app" data-src="./images/app/nyamplay-app-shot-07.webp" data-caption="Nyamplay 앱 스크린샷 07">
+              <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-07.webp" data-caption="nyamplay 앱 스크린샷 07">
                 <div class="banner-media">
-                  <img src="./images/app/nyamplay-app-shot-07.webp" alt="Nyamplay 앱 스크린샷 07" loading="lazy">
+                  <img src="./images/app/nyamplay-app-shot-07.webp" alt="nyamplay 앱 스크린샷 07" loading="lazy">
                 </div>
                 <div class="banner-info">
                   <small>NYAMPLAY APP · 07</small>
-                  <strong>Nyamplay 앱 스크린샷 07</strong>
+                  <strong>nyamplay 앱 스크린샷 07</strong>
                 </div>
               </article>
 
-              <article class="banner-card app-card" data-gallery="app" data-src="./images/app/nyamplay-app-shot-08.webp" data-caption="Nyamplay 앱 스크린샷 08">
+              <article class="banner-card app-card" data-gallery="nyamplay-app" data-src="./images/app/nyamplay-app-shot-08.webp" data-caption="nyamplay 앱 스크린샷 08">
                 <div class="banner-media">
-                  <img src="./images/app/nyamplay-app-shot-08.webp" alt="Nyamplay 앱 스크린샷 08" loading="lazy">
+                  <img src="./images/app/nyamplay-app-shot-08.webp" alt="nyamplay 앱 스크린샷 08" loading="lazy">
                 </div>
                 <div class="banner-info">
                   <small>NYAMPLAY APP · 08</small>
-                  <strong>Nyamplay 앱 스크린샷 08</strong>
+                  <strong>nyamplay 앱 스크린샷 08</strong>
                 </div>
               </article>
             </div>
-            <div class="gallery-pagination" id="app-pagination" aria-label="앱 스크린샷 페이지"></div>
+            <div class="gallery-pagination" id="nyamplay-app-pagination" aria-label="nyamplay 앱 스크린샷 페이지"></div>
           </div>
         </section>
 
@@ -2101,7 +2111,7 @@
         }
 
         // 모바일 앱 스크린샷: 카드를 누르지 않은 상태에서도 좌우 스와이프로 페이지 이동
-        if (gridId === 'app-grid') {
+        if (grid.classList.contains('app-grid')) {
           let touchStartX = 0;
           let touchStartY = 0;
 
@@ -2151,7 +2161,8 @@
 
       setupPagination('monthly-grid', 'monthly-pagination');
       setupPagination('other-grid', 'other-pagination');
-      setupPagination('app-grid', 'app-pagination');
+      setupPagination('eck-app-grid', 'eck-app-pagination');
+      setupPagination('nyamplay-app-grid', 'nyamplay-app-pagination');
 
       const lightbox = document.getElementById('lightbox');
       const lightboxImage = document.getElementById('lightbox-image');
