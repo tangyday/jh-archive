@@ -2096,10 +2096,14 @@
             currentPage = page;
             render();
 
-            const group = grid.closest('.gallery-group');
-            if (group) {
-              const y = group.getBoundingClientRect().top + window.scrollY - 90;
-              window.scrollTo({ top: y, behavior: 'smooth' });
+            // 앱 스크린샷은 앱별 현재 스크롤 위치를 유지한다.
+            // 일반 배너 갤러리만 해당 그룹 상단으로 이동한다.
+            if (!grid.classList.contains('app-grid')) {
+              const group = grid.closest('.gallery-group');
+              if (group) {
+                const y = group.getBoundingClientRect().top + window.scrollY - 90;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+              }
             }
           });
 
